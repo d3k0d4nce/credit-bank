@@ -1,14 +1,16 @@
 package ru.kishko.deal.entities;
 
+import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import ru.kishko.deal.dtos.LoanOfferDto;
 import ru.kishko.deal.dtos.jsonb.StatusHistoryJsonb;
 import ru.kishko.deal.enums.ApplicationStatus;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +24,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "statement")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Statement {
 
     @Id
@@ -43,10 +46,10 @@ public class Statement {
     private ApplicationStatus applicationStatus;
 
     @Column(name = "creation_date", updatable = false)
-    private Date creationDate;
+    private Timestamp creationDate;
 
-    @Embedded
-    @Column(name = "applied_offer", columnDefinition = "jsonb")
+    @Type(type = "jsonb")
+    @Column(name = "applied_offer")
     private LoanOfferDto appliedOffer;
 
     @Column(name = "sign_date")
@@ -55,8 +58,8 @@ public class Statement {
     @Column(name = "ses_code")
     private Integer sesCode;
 
-    @ElementCollection
-    @Column(name = "status_history", columnDefinition = "jsonb")
+    @Type(type = "jsonb")
+    @Column(name = "status_history")
     private List<StatusHistoryJsonb> statusHistory;
 
     @Override

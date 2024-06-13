@@ -3,7 +3,6 @@ package ru.kishko.deal.dtos;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Embeddable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 @Setter
 @Builder
 @ToString
-@Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)

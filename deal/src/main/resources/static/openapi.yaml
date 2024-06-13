@@ -256,6 +256,131 @@ components:
         remainingDebt:
           type: number
           description: Remaining debt amount
+    ScoringDataDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          minimum: 30000
+          description: Loan amount
+        term:
+          type: integer
+          format: int32
+          minimum: 6
+          description: Loan term in months
+        firstName:
+          type: string
+          pattern: '^[a-zA-Z]{2,30}$'
+          description: First name
+        lastName:
+          type: string
+          pattern: '^[a-zA-Z]{2,30}$'
+          description: Last name
+        middleName:
+          type: string
+          pattern: '^[a-zA-Z]{2,30}$'
+          description: Middle name
+        gender:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/Gender'
+          description: Gender
+        birthdate:
+          type: string
+          format: date
+          description: Birthdate
+        passportSeries:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 4
+          maxLength: 4
+          description: Passport series
+        passportNumber:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 6
+          maxLength: 6
+          description: Passport number
+        passportIssueDate:
+          type: string
+          format: date
+          description: Passport issue date
+        passportIssueBranch:
+          type: string
+          maxLength: 100
+          description: Passport issue branch
+        maritalStatus:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/MaritalStatus'
+          description: Marital status
+        dependentAmount:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Number of dependents
+        employment:
+          allOf:
+            - $ref: '#/components/schemas/EmploymentDto'
+          description: Employment information
+        accountNumber:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 16
+          maxLength: 20
+          description: Account number
+        isInsuranceEnabled:
+          type: boolean
+          description: Insurance enabled flag
+        isSalaryClient:
+          type: boolean
+          description: Salary client flag
+      required:
+        - amount
+        - term
+        - firstName
+        - lastName
+        - gender
+        - birthdate
+        - passportSeries
+        - passportNumber
+        - passportIssueDate
+        - passportIssueBranch
+        - maritalStatus
+        - dependentAmount
+        - employment
+        - accountNumber
+        - isInsuranceEnabled
+        - isSalaryClient
+    CreditDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Loan amount
+        term:
+          type: integer
+          format: int32
+          description: Loan term in months
+        monthlyPayment:
+          type: number
+          description: Monthly payment
+        rate:
+          type: number
+          description: Interest rate
+        psk:
+          type: number
+          description: PSK (Loan product cost)
+        isInsuranceEnabled:
+          type: boolean
+          description: Insurance enabled flag
+        isSalaryClient:
+          type: boolean
+          description: Salary client flag
+        paymentSchedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentScheduleElementDto'
     Gender:
       type: string
       enum:

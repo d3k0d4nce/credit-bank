@@ -1,8 +1,11 @@
 package ru.kishko.deal.entities;
 
+import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import ru.kishko.deal.dtos.PaymentScheduleElementDto;
 import ru.kishko.deal.enums.CreditStatus;
 
@@ -20,6 +23,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "credit")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Credit {
 
     @Id
@@ -43,8 +47,8 @@ public class Credit {
     @Column(name = "psk")
     private BigDecimal psk;
 
-    @ElementCollection
-    @Column(name = "payment_schedule", columnDefinition = "jsonb")
+    @Type(type = "jsonb")
+    @Column(name = "payment_schedule")
     private List<PaymentScheduleElementDto> paymentSchedule;
 
     @Column(name = "insurance_enabled")

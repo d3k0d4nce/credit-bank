@@ -1,15 +1,18 @@
 package ru.kishko.deal.entities;
 
+import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import ru.kishko.deal.dtos.jsonb.EmploymentJsonb;
 import ru.kishko.deal.dtos.jsonb.PassportJsonb;
 import ru.kishko.deal.enums.Gender;
 import ru.kishko.deal.enums.MaritalStatus;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -21,6 +24,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "client")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Client {
 
     @Id
@@ -39,7 +43,7 @@ public class Client {
     private String middleName;
 
     @Column(name = "birth_date")
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @Column(name = "email")
     private String email;
@@ -55,12 +59,12 @@ public class Client {
     @Column(name = "dependent_amount")
     private Integer dependentAmount;
 
-    @Embedded
-    @Column(name = "passport", columnDefinition = "jsonb")
+    @Type(type = "jsonb")
+    @Column(name = "passport")
     private PassportJsonb passport;
 
-    @Embedded
-    @Column(name = "employment", columnDefinition = "jsonb")
+    @Type(type = "jsonb")
+    @Column(name = "employment")
     private EmploymentJsonb employment;
 
     @Column(name = "account_number")
