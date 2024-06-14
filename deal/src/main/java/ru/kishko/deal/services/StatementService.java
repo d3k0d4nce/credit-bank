@@ -1,6 +1,6 @@
 package ru.kishko.deal.services;
 
-import ru.kishko.deal.dtos.LoanOfferDto;
+import ru.kishko.api.dtos.LoanOfferDto;
 import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Statement;
 

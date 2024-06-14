@@ -1,8 +1,8 @@
 package ru.kishko.deal.services;
 
-import ru.kishko.deal.dtos.FinishRegistrationRequestDto;
-import ru.kishko.deal.dtos.LoanOfferDto;
-import ru.kishko.deal.dtos.LoanStatementRequestDto;
+import ru.kishko.api.dtos.FinishRegistrationRequestDto;
+import ru.kishko.api.dtos.LoanOfferDto;
+import ru.kishko.api.dtos.LoanStatementRequestDto;
 
 import java.util.List;
 

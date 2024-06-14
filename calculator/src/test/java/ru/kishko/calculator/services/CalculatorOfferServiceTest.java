@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ru.kishko.calculator.dtos.LoanOfferDto;
-import ru.kishko.calculator.dtos.LoanStatementRequestDto;
+import ru.kishko.api.dtos.LoanOfferDto;
+import ru.kishko.api.dtos.LoanStatementRequestDto;
 import ru.kishko.calculator.services.Impl.CalculatorOfferServiceImpl;
 import ru.kishko.calculator.services.utils.LoanCalculator;
 

@@ -6,8 +6,8 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import ru.kishko.deal.dtos.PaymentScheduleElementDto;
-import ru.kishko.deal.enums.CreditStatus;
+import ru.kishko.api.dtos.PaymentScheduleElementDto;
+import ru.kishko.api.enums.CreditStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

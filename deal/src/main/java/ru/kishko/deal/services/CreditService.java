@@ -1,6 +1,6 @@
 package ru.kishko.deal.services;
 
-import ru.kishko.deal.dtos.CreditDto;
+import ru.kishko.api.dtos.CreditDto;
 import ru.kishko.deal.entities.Credit;
 
 public interface CreditService {

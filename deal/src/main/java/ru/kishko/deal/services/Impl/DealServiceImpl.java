@@ -3,12 +3,12 @@ package ru.kishko.deal.services.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.kishko.deal.dtos.*;
+import ru.kishko.api.dtos.*;
+import ru.kishko.deal.services.DealService;
 import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Statement;
 import ru.kishko.deal.services.ClientService;
 import ru.kishko.deal.services.CreditService;
-import ru.kishko.deal.services.DealService;
 import ru.kishko.deal.services.StatementService;
 import ru.kishko.deal.utils.Utils;
 

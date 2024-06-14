@@ -6,10 +6,10 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import ru.kishko.deal.dtos.jsonb.EmploymentJsonb;
-import ru.kishko.deal.dtos.jsonb.PassportJsonb;
-import ru.kishko.deal.enums.Gender;
-import ru.kishko.deal.enums.MaritalStatus;
+import ru.kishko.api.enums.Gender;
+import ru.kishko.api.enums.MaritalStatus;
+import ru.kishko.deal.jsonb.EmploymentJsonb;
+import ru.kishko.deal.jsonb.PassportJsonb;
 
 import javax.persistence.*;
 import java.time.LocalDate;

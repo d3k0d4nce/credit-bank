@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.kishko.deal.dtos.FinishRegistrationRequestDto;
-import ru.kishko.deal.dtos.LoanOfferDto;
-import ru.kishko.deal.dtos.LoanStatementRequestDto;
+import ru.kishko.api.dtos.FinishRegistrationRequestDto;
+import ru.kishko.api.dtos.LoanOfferDto;
+import ru.kishko.api.dtos.LoanStatementRequestDto;
 import ru.kishko.deal.services.DealService;
 
 import javax.validation.Valid;

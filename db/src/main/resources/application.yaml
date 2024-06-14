@@ -1,0 +1,7 @@
+spring:
+  liquibase:
+    change-log: classpath:liquibase/changelog.yaml
+    enabled: true
+
+server:
+  port: 9191

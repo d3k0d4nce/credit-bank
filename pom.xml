@@ -5,6 +5,8 @@
 	<modules>
 		<module>calculator</module>
 		<module>deal</module>
+		<module>api</module>
+		<module>db</module>
 	</modules>
 	<packaging>pom</packaging>
 	<groupId>ru.kishko</groupId>

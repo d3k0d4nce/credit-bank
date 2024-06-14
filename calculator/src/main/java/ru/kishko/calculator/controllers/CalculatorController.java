@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.kishko.calculator.dtos.CreditDto;
-import ru.kishko.calculator.dtos.LoanOfferDto;
-import ru.kishko.calculator.dtos.LoanStatementRequestDto;
-import ru.kishko.calculator.dtos.ScoringDataDto;
+import ru.kishko.api.dtos.CreditDto;
+import ru.kishko.api.dtos.LoanOfferDto;
+import ru.kishko.api.dtos.LoanStatementRequestDto;
+import ru.kishko.api.dtos.ScoringDataDto;
 import ru.kishko.calculator.services.CalculatorCreditService;
 import ru.kishko.calculator.services.CalculatorOfferService;
 
