@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.kishko.api.dtos.LoanOfferDto;
-import ru.kishko.api.dtos.LoanStatementRequestDto;
 import ru.kishko.calculator.services.CalculatorOfferService;
 import ru.kishko.calculator.services.utils.LoanCalculator;
+import ru.kishko.openapi.model.LoanOfferDto;
+import ru.kishko.openapi.model.LoanStatementRequestDto;
 
 import java.math.BigDecimal;
 import java.util.Comparator;

@@ -1,7 +1,7 @@
 package ru.kishko.deal.jsonb;
 
 import lombok.*;
-import ru.kishko.api.enums.ChangeType;
+import ru.kishko.openapi.model.ChangeType;
 
 import java.sql.Timestamp;
 

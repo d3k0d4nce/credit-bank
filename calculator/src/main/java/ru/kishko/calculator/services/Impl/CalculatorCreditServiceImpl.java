@@ -4,12 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.kishko.api.dtos.CreditDto;
-import ru.kishko.api.dtos.PaymentScheduleElementDto;
-import ru.kishko.api.dtos.ScoringDataDto;
 import ru.kishko.calculator.services.CalculatorCreditService;
 import ru.kishko.calculator.services.utils.LoanCalculator;
 import ru.kishko.calculator.services.utils.UserValidator;
+import ru.kishko.openapi.model.CreditDto;
+import ru.kishko.openapi.model.PaymentScheduleElementDto;
+import ru.kishko.openapi.model.ScoringDataDto;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

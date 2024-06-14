@@ -1,6 +1,6 @@
-package ru.kishko.api.enums;
-
-public enum ChangeType {
-    AUTOMATIC,
-    MANUAL
-}
+//package ru.kishko.api.enums;
+//
+//public enum ChangeType {
+//    AUTOMATIC,
+//    MANUAL
+//}

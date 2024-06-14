@@ -1,6 +1,6 @@
-package ru.kishko.api.enums;
-
-public enum CreditStatus {
-    CALCULATED,
-    ISSUED
-}
+//package ru.kishko.api.enums;
+//
+//public enum CreditStatus {
+//    CALCULATED,
+//    ISSUED
+//}

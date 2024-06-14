@@ -3,9 +3,9 @@ package ru.kishko.deal.utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.kishko.api.dtos.*;
 import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Statement;
+import ru.kishko.openapi.model.*;
 
 import java.util.List;
 import java.util.UUID;

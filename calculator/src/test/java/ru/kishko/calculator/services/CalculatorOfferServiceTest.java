@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ru.kishko.api.dtos.LoanOfferDto;
-import ru.kishko.api.dtos.LoanStatementRequestDto;
 import ru.kishko.calculator.services.Impl.CalculatorOfferServiceImpl;
 import ru.kishko.calculator.services.utils.LoanCalculator;
+import ru.kishko.openapi.model.LoanOfferDto;
+import ru.kishko.openapi.model.LoanStatementRequestDto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

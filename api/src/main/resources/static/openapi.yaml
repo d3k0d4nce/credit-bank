@@ -1,10 +1,43 @@
 openapi: 3.0.0
 info:
-  title: DealController API
+  title: Controller API
   version: 1.0.0
 servers:
+  - url: http://localhost:8080
   - url: http://localhost:8081
 paths:
+  /calculator/offers:
+    post:
+      summary: Calculate loan offers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanStatementRequestDto'
+      responses:
+        '200':
+          description: Successful calculation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOfferDto'
+  /calculator/calc:
+    post:
+      summary: Calculate credit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScoringDataDto'
+      responses:
+        '200':
+          description: Successful calculation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditDto'
   /deal/statement:
     post:
       summary: Calculate possible loan conditions
@@ -155,107 +188,6 @@ components:
         - passportIssueBranch
         - employment
         - accountNumber
-    LoanOfferDto:
-      type: object
-      properties:
-        statementId:
-          type: string
-          format: uuid
-          description: Statement ID
-        requestedAmount:
-          type: number
-          description: Requested loan amount
-        totalAmount:
-          type: number
-          description: Total loan amount
-        term:
-          type: integer
-          format: int32
-          description: Loan term in months
-        monthlyPayment:
-          type: number
-          description: Monthly payment
-        rate:
-          type: number
-          description: Interest rate
-        isInsuranceEnabled:
-          type: boolean
-          description: Insurance enabled flag
-        isSalaryClient:
-          type: boolean
-          description: Salary client flag
-      required:
-        - statementId
-        - requestedAmount
-        - totalAmount
-        - term
-        - monthlyPayment
-        - rate
-        - isInsuranceEnabled
-        - isSalaryClient
-    EmploymentDto:
-      type: object
-      properties:
-        employmentStatus:
-          type: string
-          allOf:
-            - $ref: '#/components/schemas/EmploymentStatus'
-          description: Employment status
-        employerINN:
-          type: string
-          pattern: '[0-9]+'
-          minLength: 10
-          maxLength: 12
-          description: Employer INN
-        salary:
-          type: number
-          minimum: 10000
-          description: Salary
-        position:
-          type: string
-          allOf:
-            - $ref: '#/components/schemas/EmploymentPosition'
-          description: Position
-        workExperienceTotal:
-          type: integer
-          format: int32
-          minimum: 0
-          description: Total work experience in years
-        workExperienceCurrent:
-          type: integer
-          format: int32
-          minimum: 0
-          description: Work experience at current employer in years
-      required:
-        - employmentStatus
-        - employerINN
-        - salary
-        - position
-        - workExperienceTotal
-        - workExperienceCurrent
-    PaymentScheduleElementDto:
-      type: object
-      properties:
-        number:
-          type: integer
-          format: int32
-          description: Payment number
-        date:
-          type: string
-          format: date
-          description: Payment date
-        totalPayment:
-          type: number
-          description: Total payment amount
-        interestPayment:
-          type: number
-          description: Interest payment amount
-        debtPayment:
-          type: number
-          description: Debt payment amount
-        remainingDebt:
-          type: number
-          description: Remaining debt amount
     ScoringDataDto:
       type: object
       properties:
@@ -352,6 +284,107 @@ components:
         - accountNumber
         - isInsuranceEnabled
         - isSalaryClient
+    EmploymentDto:
+      type: object
+      properties:
+        employmentStatus:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/EmploymentStatus'
+          description: Employment status
+        employerINN:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 12
+          description: Employer INN
+        salary:
+          type: number
+          minimum: 10000
+          description: Salary
+        position:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/EmploymentPosition'
+          description: EmploymentPosition
+        workExperienceTotal:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Total work experience in years
+        workExperienceCurrent:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Work experience at current employer in years
+      required:
+        - employmentStatus
+        - employerINN
+        - salary
+        - position
+        - workExperienceTotal
+        - workExperienceCurrent
+    LoanOfferDto:
+      type: object
+      properties:
+        statementId:
+          type: string
+          format: uuid
+          description: Statement ID
+        requestedAmount:
+          type: number
+          description: Requested loan amount
+        totalAmount:
+          type: number
+          description: Total loan amount
+        term:
+          type: integer
+          format: int32
+          description: Loan term in months
+        monthlyPayment:
+          type: number
+          description: Monthly payment
+        rate:
+          type: number
+          description: Interest rate
+        isInsuranceEnabled:
+          type: boolean
+          description: Insurance enabled flag
+        isSalaryClient:
+          type: boolean
+          description: Salary client flag
+      required:
+        - statementId
+        - requestedAmount
+        - totalAmount
+        - term
+        - monthlyPayment
+        - rate
+        - isInsuranceEnabled
+        - isSalaryClient
+    PaymentScheduleElementDto:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+          description: Payment number
+        date:
+          type: string
+          format: date
+          description: Payment date
+        totalPayment:
+          type: number
+          description: Total payment amount
+        interestPayment:
+          type: number
+          description: Interest payment amount
+        debtPayment:
+          type: number
+          description: Debt payment amount
+        remainingDebt:
+          type: number
+          description: Remaining debt amount
     CreditDto:
       type: object
       properties:
@@ -408,3 +441,25 @@ components:
         - OWNER
         - TOP_MANAGER
         - MID_MANAGER
+    CreditStatus:
+      type: string
+      enum:
+        - CALCULATED
+        - ISSUED
+    ChangeType:
+      type: string
+      enum:
+        - MANUAL
+        - AUTOMATIC
+    ApplicationStatus:
+      type: string
+      enum:
+        - PREAPPROVAL
+        - APPROVED
+        - CC_DENIED
+        - CC_APPROVED
+        - PREPARE_DOCUMENTS
+        - DOCUMENT_CREATED
+        - CLIENT_DENIED
+        - DOCUMENT_SIGNED
+        - CREDIT_ISSUED

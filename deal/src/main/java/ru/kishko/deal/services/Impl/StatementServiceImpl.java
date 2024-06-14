@@ -3,15 +3,15 @@ package ru.kishko.deal.services.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.kishko.api.dtos.LoanOfferDto;
-import ru.kishko.api.enums.ApplicationStatus;
-import ru.kishko.api.enums.ChangeType;
 import ru.kishko.deal.jsonb.StatusHistoryJsonb;
 import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Statement;
 import ru.kishko.deal.exceptions.StatementNotFoundException;
 import ru.kishko.deal.repositories.StatementRepository;
 import ru.kishko.deal.services.StatementService;
+import ru.kishko.openapi.model.ApplicationStatus;
+import ru.kishko.openapi.model.ChangeType;
+import ru.kishko.openapi.model.LoanOfferDto;
 
 import java.sql.Timestamp;
 import java.util.Collections;

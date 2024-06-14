@@ -6,9 +6,9 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import ru.kishko.api.dtos.LoanOfferDto;
-import ru.kishko.api.enums.ApplicationStatus;
 import ru.kishko.deal.jsonb.StatusHistoryJsonb;
+import ru.kishko.openapi.model.ApplicationStatus;
+import ru.kishko.openapi.model.LoanOfferDto;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

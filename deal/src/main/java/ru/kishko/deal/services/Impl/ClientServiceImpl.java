@@ -3,12 +3,12 @@ package ru.kishko.deal.services.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.kishko.api.dtos.LoanStatementRequestDto;
 import ru.kishko.deal.jsonb.EmploymentJsonb;
 import ru.kishko.deal.jsonb.PassportJsonb;
 import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.repositories.ClientRepository;
 import ru.kishko.deal.services.ClientService;
+import ru.kishko.openapi.model.LoanStatementRequestDto;
 
 @Slf4j
 @Service

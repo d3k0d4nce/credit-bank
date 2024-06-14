@@ -1,7 +1,7 @@
 package ru.kishko.calculator.services;
 
-import ru.kishko.api.dtos.LoanOfferDto;
-import ru.kishko.api.dtos.LoanStatementRequestDto;
+import ru.kishko.openapi.model.LoanOfferDto;
+import ru.kishko.openapi.model.LoanStatementRequestDto;
 
 import java.util.List;
 

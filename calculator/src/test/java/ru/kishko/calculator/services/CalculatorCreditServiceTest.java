@@ -4,16 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ru.kishko.api.dtos.CreditDto;
-import ru.kishko.api.dtos.EmploymentDto;
-import ru.kishko.api.dtos.ScoringDataDto;
-import ru.kishko.api.enums.EmploymentPosition;
-import ru.kishko.api.enums.EmploymentStatus;
-import ru.kishko.api.enums.Gender;
-import ru.kishko.api.enums.MaritalStatus;
 import ru.kishko.calculator.services.Impl.CalculatorCreditServiceImpl;
 import ru.kishko.calculator.services.utils.LoanCalculator;
 import ru.kishko.calculator.services.utils.UserValidator;
+import ru.kishko.openapi.model.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

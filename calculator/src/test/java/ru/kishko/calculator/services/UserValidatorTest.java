@@ -3,15 +3,9 @@ package ru.kishko.calculator.services;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import ru.kishko.api.dtos.CreditDto;
-import ru.kishko.api.dtos.EmploymentDto;
-import ru.kishko.api.dtos.ScoringDataDto;
-import ru.kishko.api.enums.EmploymentPosition;
-import ru.kishko.api.enums.EmploymentStatus;
-import ru.kishko.api.enums.Gender;
-import ru.kishko.api.enums.MaritalStatus;
 import ru.kishko.calculator.exceptions.CreditException;
 import ru.kishko.calculator.services.utils.UserValidator;
+import ru.kishko.openapi.model.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

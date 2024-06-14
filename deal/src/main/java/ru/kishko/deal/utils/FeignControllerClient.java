@@ -3,10 +3,10 @@ package ru.kishko.deal.utils;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.kishko.api.dtos.CreditDto;
-import ru.kishko.api.dtos.LoanOfferDto;
-import ru.kishko.api.dtos.LoanStatementRequestDto;
-import ru.kishko.api.dtos.ScoringDataDto;
+import ru.kishko.openapi.model.CreditDto;
+import ru.kishko.openapi.model.LoanOfferDto;
+import ru.kishko.openapi.model.LoanStatementRequestDto;
+import ru.kishko.openapi.model.ScoringDataDto;
 
 import javax.validation.Valid;
 import java.util.List;
