@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet id="create-credit-table" author="d3k0d4nce">
+        <insert tableName="credit">
+            <column name="credit_id" value="1d342110-e0e7-4c4c-ab50-0188d834d951"/>
+            <column name="amount" value="1000000"/>
+            <column name="term" value="36"/>
+            <column name="monthly_payment" value="30000"/>
+            <column name="rate" value="10.5"/>
+            <column name="psk" value="11.2"/>
+            <column name="payment_schedule" value='[{"date": "2023-04-01", "amount": "30000"}, {"date": "2023-05-01", "amount": "30000"}, {"date": "2023-06-01", "amount": "30000"}]'/>
+            <column name="insurance_enabled" value="true"/>
+            <column name="salary_client" value="false"/>
+            <column name="credit_status" value="CALCULATED"/>
+        </insert>
+        <insert tableName="credit">
+            <column name="credit_id" value="2d342110-e0e7-4c4c-ab50-0188d834d952"/>
+            <column name="amount" value="500000"/>
+            <column name="term" value="24"/>
+            <column name="monthly_payment" value="25000"/>
+            <column name="rate" value="12.0"/>
+            <column name="psk" value="12.8"/>
+            <column name="payment_schedule" value='[{"date": "2023-04-01", "amount": "25000"}, {"date": "2023-05-01", "amount": "25000"}, {"date": "2023-06-01", "amount": "25000"}]'/>
+            <column name="insurance_enabled" value="false"/>
+            <column name="salary_client" value="true"/>
+            <column name="credit_status" value="ISSUED"/>
+        </insert>
+        <insert tableName="credit">
+            <column name="credit_id" value="3d342110-e0e7-4c4c-ab50-0188d834d953"/>
+            <column name="amount" value="200000"/>
+            <column name="term" value="12"/>
+            <column name="monthly_payment" value="20000"/>
+            <column name="rate" value="14.5"/>
+            <column name="psk" value="15.3"/>
+            <column name="payment_schedule" value='[{"date": "2023-04-01", "amount": "20000"}, {"date": "2023-05-01", "amount": "20000"}, {"date": "2023-06-01", "amount": "20000"}]'/>
+            <column name="insurance_enabled" value="true"/>
+            <column name="salary_client" value="false"/>
+            <column name="credit_status" value="CALCULATED"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

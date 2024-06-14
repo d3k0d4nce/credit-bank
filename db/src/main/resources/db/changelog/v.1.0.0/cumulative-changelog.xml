@@ -11,5 +11,8 @@
     <include file="create-client-table.xml" relativeToChangelogFile="true"/>
     <include file="create-credit-table.xml" relativeToChangelogFile="true"/>
     <include file="create-statement-table.xml" relativeToChangelogFile="true"/>
+    <include file="insert-client-table.xml" relativeToChangelogFile="true"/>
+    <include file="insert-credit-table.xml" relativeToChangelogFile="true"/>
+    <include file="insert-statement-table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
