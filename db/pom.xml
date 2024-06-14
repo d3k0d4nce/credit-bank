@@ -7,37 +7,22 @@
         <groupId>ru.kishko</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <packaging>jar</packaging>
+
     <artifactId>db</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>db</name>
-    <description>db</description>
+
     <properties>
         <java.version>17</java.version>
     </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
