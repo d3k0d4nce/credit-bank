@@ -32,13 +32,7 @@ public class CalculatorOfferServiceImpl implements CalculatorOfferService {
 
     @Override
     public List<LoanOfferDto> calculateLoanOffers(LoanStatementRequestDto request) {
-
-        BindingResult errors = new BeanPropertyBindingResult(request, "request");
-        ageValidator.validate(request, errors);
-        if (errors.hasErrors()) {
-            throw new ValidationException(errors);
-        }
-
+        ageValidator.validate(request);
         log.info("Starting calculation of loan offers for request: {}", request);
         return Stream.of(true, false)
                 .flatMap(isSalaryClient -> Stream.of(true, false)

@@ -34,13 +34,7 @@ public class CalculatorCreditServiceImpl implements CalculatorCreditService {
 
     @Override
     public CreditDto calculateCredit(ScoringDataDto request) {
-
-        BindingResult errors = new BeanPropertyBindingResult(request, "request");
-        ageValidator.validate(request, errors);
-        if (errors.hasErrors()) {
-            throw new ValidationException(errors);
-        }
-
+        ageValidator.validate(request);
         log.info("Starting credit calculation for request: {}", request); // Логирование начала расчета
         return createCredit(request);
     }

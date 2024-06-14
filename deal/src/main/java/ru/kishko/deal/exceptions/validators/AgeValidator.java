@@ -1,8 +1,11 @@
 package ru.kishko.deal.exceptions.validators;
 
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ru.kishko.deal.exceptions.ValidationException;
 import ru.kishko.openapi.model.LoanStatementRequestDto;
 import ru.kishko.openapi.model.ScoringDataDto;
 
@@ -31,6 +34,14 @@ public class AgeValidator implements Validator {
             if (Period.between(birthdate, LocalDate.now()).getYears() < 18) {
                 errors.rejectValue("birthdate", "birthdate.invalid", "Birthdate must be at least 18 years ago");
             }
+        }
+    }
+
+    public void validate(Object request) {
+        BindingResult errors = new BeanPropertyBindingResult(request, "request");
+        this.validate(request, errors);
+        if (errors.hasErrors()) {
+            throw new ValidationException(errors);
         }
     }
 }

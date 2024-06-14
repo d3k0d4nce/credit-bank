@@ -3,6 +3,7 @@ package ru.kishko.deal.services.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import ru.kishko.deal.exceptions.ValidationException;
@@ -33,14 +34,9 @@ public class DealServiceImpl implements DealService {
     private final Utils utils;
 
     @Override
+    @Transactional
     public List<LoanOfferDto> getLoanOffers(LoanStatementRequestDto request) {
-
-        BindingResult errors = new BeanPropertyBindingResult(request, "request");
-        ageValidator.validate(request, errors);
-        if (errors.hasErrors()) {
-            throw new ValidationException(errors);
-        }
-
+        ageValidator.validate(request);
         log.info("Getting loan offers for request: {}", request);
         Client client = clientService.createClient(request);
         Statement statement = statementService.createStatement(client);
@@ -58,14 +54,9 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
+    @Transactional
     public void calculateLoan(String statementId, FinishRegistrationRequestDto request) {
-
-        BindingResult errors = new BeanPropertyBindingResult(request, "request");
-        passportIssueDateValidator.validate(request, errors);
-        if (errors.hasErrors()) {
-            throw new ValidationException(errors);
-        }
-
+        passportIssueDateValidator.validate(request);
         log.info("Calculating loan for statementId: {} with request: {}", statementId, request);
         Statement statement = statementService.getStatementById(UUID.fromString(statementId));
         ScoringDataDto scoringData = utils.makeScoringDataDto(statement, request);
