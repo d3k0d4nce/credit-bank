@@ -11,7 +11,7 @@
             <column name="credit_id" value="1d342110-e0e7-4c4c-ab50-0188d834d951"/>
             <column name="status" value="PREAPPROVAL"/>
             <column name="creation_date" value="2023-03-01"/>
-            <column name="applied_offer" value='{"amount": 1000000, "term": 36, "rate": 10.5}'/>
+            <column name="applied_offer" value='{"rate":15,"term":6,"statementId":"d8290a9b-f536-43fc-84e7-1e1322b2334c","totalAmount":31326.06,"isSalaryClient":false,"monthlyPayment":5221.01,"requestedAmount":30000,"isInsuranceEnabled":false}'/>
             <column name="sign_date" value="2023-03-15 12:00:00"/>
             <column name="ses_code" value="123456"/>
             <column name="status_history" value='[{"status": "PREAPPROVAL", "timestamp": "2023-03-01T12:00:00", "changeType": "MANUAL"}, {"status": "APPROVED", "timestamp": "2023-03-15T12:00:00", "changeType": "AUTOMATIC"}]'/>
@@ -22,8 +22,8 @@
             <column name="credit_id" value="2d342110-e0e7-4c4c-ab50-0188d834d952"/>
             <column name="status" value="CC_DENIED"/>
             <column name="creation_date" value="2023-03-10"/>
-            <column name="applied_offer" value='{"amount": 500000, "term": 24, "rate": 12.0}'/>
-            <column name="sign_date" value="null"/>
+            <column name="applied_offer" value='{"rate":15,"term":6,"statementId":"d8290a9b-f536-43fc-84e7-1e1322b2334c","totalAmount":31326.06,"isSalaryClient":false,"monthlyPayment":5221.01,"requestedAmount":30000,"isInsuranceEnabled":false}'/>
+            <column name="sign_date" value="2023-03-15 12:00:00"/>
             <column name="ses_code" value="789012"/>
             <column name="status_history" value='[{"status": "PREAPPROVAL", "timestamp": "2023-03-10T12:00:00", "changeType": "MANUAL"}, {"status": "CC_DENIED", "timestamp": "2023-03-12T12:00:00", "changeType": "AUTOMATIC"}]'/>
         </insert>
@@ -33,8 +33,8 @@
             <column name="credit_id" value="3d342110-e0e7-4c4c-ab50-0188d834d953"/>
             <column name="status" value="DOCUMENT_CREATED"/>
             <column name="creation_date" value="2023-03-20"/>
-            <column name="applied_offer" value='{"amount": 200000, "term": 12, "rate": 14.5}'/>
-            <column name="sign_date" value="null"/>
+            <column name="applied_offer" value='{"rate":15,"term":6,"statementId":"d8290a9b-f536-43fc-84e7-1e1322b2334c","totalAmount":31326.06,"isSalaryClient":false,"monthlyPayment":5221.01,"requestedAmount":30000,"isInsuranceEnabled":false}'/>
+            <column name="sign_date" value="2023-03-15 12:00:00"/>
             <column name="ses_code" value="345678"/>
             <column name="status_history" value='[{"status": "PREAPPROVAL", "timestamp": "2023-03-20T12:00:00", "changeType": "MANUAL"}, {"status": "CC_APPROVED", "timestamp": "2023-03-21T12:00:00", "changeType": "AUTOMATIC"}, {"status": "DOCUMENT_CREATED", "timestamp": "2023-03-22T12:00:00", "changeType": "MANUAL"}]'/>
         </insert>

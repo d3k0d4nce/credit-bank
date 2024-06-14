@@ -7,37 +7,37 @@
     <changeSet id="create-credit-table" author="d3k0d4nce">
         <insert tableName="credit">
             <column name="credit_id" value="1d342110-e0e7-4c4c-ab50-0188d834d951"/>
-            <column name="amount" value="1000000"/>
-            <column name="term" value="36"/>
-            <column name="monthly_payment" value="30000"/>
-            <column name="rate" value="10.5"/>
-            <column name="psk" value="11.2"/>
-            <column name="payment_schedule" value='[{"date": "2023-04-01", "amount": "30000"}, {"date": "2023-05-01", "amount": "30000"}, {"date": "2023-06-01", "amount": "30000"}]'/>
-            <column name="insurance_enabled" value="true"/>
+            <column name="amount" value="31326.06"/>
+            <column name="term" value="6"/>
+            <column name="monthly_payment" value="5451.79"/>
+            <column name="rate" value="15"/>
+            <column name="psk" value="32710.74"/>
+            <column name="payment_schedule" value='[{"date":[2024,7,15],"number":1,"debtPayment":5060.21,"totalPayment":5451.79,"remainingDebt":26265.85,"interestPayment":391.57575},{"date":[2024,8,15],"number":2,"debtPayment":5123.47,"totalPayment":5451.79,"remainingDebt":21142.38,"interestPayment":328.323125},{"date":[2024,9,15],"number":3,"debtPayment":5187.51,"totalPayment":5451.79,"remainingDebt":15954.87,"interestPayment":264.27975},{"date":[2024,10,15],"number":4,"debtPayment":5252.35,"totalPayment":5451.79,"remainingDebt":10702.52,"interestPayment":199.435875},{"date":[2024,11,15],"number":5,"debtPayment":5318.01,"totalPayment":5451.79,"remainingDebt":5384.51,"interestPayment":133.7815},{"date":[2024,12,15],"number":6,"debtPayment":5384.48,"totalPayment":5451.79,"remainingDebt":0.03,"interestPayment":67.306375}]'/>
+            <column name="insurance_enabled" value="false"/>
             <column name="salary_client" value="false"/>
             <column name="credit_status" value="CALCULATED"/>
         </insert>
         <insert tableName="credit">
             <column name="credit_id" value="2d342110-e0e7-4c4c-ab50-0188d834d952"/>
-            <column name="amount" value="500000"/>
-            <column name="term" value="24"/>
-            <column name="monthly_payment" value="25000"/>
-            <column name="rate" value="12.0"/>
-            <column name="psk" value="12.8"/>
-            <column name="payment_schedule" value='[{"date": "2023-04-01", "amount": "25000"}, {"date": "2023-05-01", "amount": "25000"}, {"date": "2023-06-01", "amount": "25000"}]'/>
+            <column name="amount" value="31326.06"/>
+            <column name="term" value="6"/>
+            <column name="monthly_payment" value="5451.79"/>
+            <column name="rate" value="15"/>
+            <column name="psk" value="32710.74"/>
+            <column name="payment_schedule" value='[{"date":[2024,7,15],"number":1,"debtPayment":5060.21,"totalPayment":5451.79,"remainingDebt":26265.85,"interestPayment":391.57575},{"date":[2024,8,15],"number":2,"debtPayment":5123.47,"totalPayment":5451.79,"remainingDebt":21142.38,"interestPayment":328.323125},{"date":[2024,9,15],"number":3,"debtPayment":5187.51,"totalPayment":5451.79,"remainingDebt":15954.87,"interestPayment":264.27975},{"date":[2024,10,15],"number":4,"debtPayment":5252.35,"totalPayment":5451.79,"remainingDebt":10702.52,"interestPayment":199.435875},{"date":[2024,11,15],"number":5,"debtPayment":5318.01,"totalPayment":5451.79,"remainingDebt":5384.51,"interestPayment":133.7815},{"date":[2024,12,15],"number":6,"debtPayment":5384.48,"totalPayment":5451.79,"remainingDebt":0.03,"interestPayment":67.306375}]'/>
             <column name="insurance_enabled" value="false"/>
-            <column name="salary_client" value="true"/>
-            <column name="credit_status" value="ISSUED"/>
+            <column name="salary_client" value="false"/>
+            <column name="credit_status" value="CALCULATED"/>
         </insert>
         <insert tableName="credit">
             <column name="credit_id" value="3d342110-e0e7-4c4c-ab50-0188d834d953"/>
-            <column name="amount" value="200000"/>
-            <column name="term" value="12"/>
-            <column name="monthly_payment" value="20000"/>
-            <column name="rate" value="14.5"/>
-            <column name="psk" value="15.3"/>
-            <column name="payment_schedule" value='[{"date": "2023-04-01", "amount": "20000"}, {"date": "2023-05-01", "amount": "20000"}, {"date": "2023-06-01", "amount": "20000"}]'/>
-            <column name="insurance_enabled" value="true"/>
+            <column name="amount" value="31326.06"/>
+            <column name="term" value="6"/>
+            <column name="monthly_payment" value="5451.79"/>
+            <column name="rate" value="15"/>
+            <column name="psk" value="32710.74"/>
+            <column name="payment_schedule" value='[{"date":[2024,7,15],"number":1,"debtPayment":5060.21,"totalPayment":5451.79,"remainingDebt":26265.85,"interestPayment":391.57575},{"date":[2024,8,15],"number":2,"debtPayment":5123.47,"totalPayment":5451.79,"remainingDebt":21142.38,"interestPayment":328.323125},{"date":[2024,9,15],"number":3,"debtPayment":5187.51,"totalPayment":5451.79,"remainingDebt":15954.87,"interestPayment":264.27975},{"date":[2024,10,15],"number":4,"debtPayment":5252.35,"totalPayment":5451.79,"remainingDebt":10702.52,"interestPayment":199.435875},{"date":[2024,11,15],"number":5,"debtPayment":5318.01,"totalPayment":5451.79,"remainingDebt":5384.51,"interestPayment":133.7815},{"date":[2024,12,15],"number":6,"debtPayment":5384.48,"totalPayment":5451.79,"remainingDebt":0.03,"interestPayment":67.306375}]'/>
+            <column name="insurance_enabled" value="false"/>
             <column name="salary_client" value="false"/>
             <column name="credit_status" value="CALCULATED"/>
         </insert>
