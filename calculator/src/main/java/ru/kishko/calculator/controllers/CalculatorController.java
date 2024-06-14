@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.kishko.api.constraints.Constraints;
 import ru.kishko.calculator.services.CalculatorCreditService;
 import ru.kishko.calculator.services.CalculatorOfferService;
 import ru.kishko.openapi.api.CalculatorApi;
@@ -28,14 +27,12 @@ public class CalculatorController implements CalculatorApi {
     @Override
     public ResponseEntity<CreditDto> calculatorCalcPost(ScoringDataDto request) {
         log.info("Received credit request: {}", request);
-        Constraints.validateAge(request.getBirthdate());
         return new ResponseEntity<>(creditService.calculateCredit(request), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<LoanOfferDto>> calculatorOffersPost(LoanStatementRequestDto request) {
         log.info("Received loan offer request: {}", request);
-        Constraints.validateAge(request.getBirthdate());
         return new ResponseEntity<>(calculatorService.calculateLoanOffers(request), HttpStatus.OK);
     }
 }

@@ -4,6 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import ru.kishko.calculator.exceptions.ValidationException;
+import ru.kishko.calculator.exceptions.validators.AgeValidator;
 import ru.kishko.calculator.services.CalculatorOfferService;
 import ru.kishko.calculator.services.utils.LoanCalculator;
 import ru.kishko.openapi.model.LoanOfferDto;
@@ -23,11 +27,18 @@ public class CalculatorOfferServiceImpl implements CalculatorOfferService {
 
     @Value("${base.interest.rate}")
     private BigDecimal BASE_INTEREST_RATE;
-
+    private final AgeValidator ageValidator;
     private final LoanCalculator loanCalculator;
 
     @Override
     public List<LoanOfferDto> calculateLoanOffers(LoanStatementRequestDto request) {
+
+        BindingResult errors = new BeanPropertyBindingResult(request, "request");
+        ageValidator.validate(request, errors);
+        if (errors.hasErrors()) {
+            throw new ValidationException(errors);
+        }
+
         log.info("Starting calculation of loan offers for request: {}", request);
         return Stream.of(true, false)
                 .flatMap(isSalaryClient -> Stream.of(true, false)

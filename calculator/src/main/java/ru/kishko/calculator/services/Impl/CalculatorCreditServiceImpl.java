@@ -4,6 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import ru.kishko.calculator.exceptions.ValidationException;
+import ru.kishko.calculator.exceptions.validators.AgeValidator;
 import ru.kishko.calculator.services.CalculatorCreditService;
 import ru.kishko.calculator.services.utils.LoanCalculator;
 import ru.kishko.calculator.services.utils.UserValidator;
@@ -24,12 +28,19 @@ public class CalculatorCreditServiceImpl implements CalculatorCreditService {
 
     @Value("${base.interest.rate}")
     private BigDecimal BASE_INTEREST_RATE;
-
     private final UserValidator userValidator;
     private final LoanCalculator loanCalculator;
+    private final AgeValidator ageValidator;
 
     @Override
     public CreditDto calculateCredit(ScoringDataDto request) {
+
+        BindingResult errors = new BeanPropertyBindingResult(request, "request");
+        ageValidator.validate(request, errors);
+        if (errors.hasErrors()) {
+            throw new ValidationException(errors);
+        }
+
         log.info("Starting credit calculation for request: {}", request); // Логирование начала расчета
         return createCredit(request);
     }

@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.kishko.api.constraints.Constraints;
 import ru.kishko.deal.services.DealService;
 import ru.kishko.openapi.api.DealApi;
 import ru.kishko.openapi.model.FinishRegistrationRequestDto;
@@ -24,7 +23,6 @@ public class DealController implements DealApi {
 
     @Override
     public ResponseEntity<Void> dealCalculateStatementIdPost(String statementId, FinishRegistrationRequestDto request) {
-        Constraints.isValidPassportIssueDate(request.getPassportIssueDate());
         log.info("Received request to calculate loan for statementId: {} with request: {}", statementId, request);
         dealService.calculateLoan(statementId, request);
         log.info("Loan calculated successfully.");
@@ -41,7 +39,6 @@ public class DealController implements DealApi {
 
     @Override
     public ResponseEntity<List<LoanOfferDto>> dealStatementPost(LoanStatementRequestDto request) {
-        Constraints.validateAge(request.getBirthdate());
         log.info("Received request for loan offers: {}", request);
         List<LoanOfferDto> offers = dealService.getLoanOffers(request);
         log.info("Returning loan offers: {}", offers);
