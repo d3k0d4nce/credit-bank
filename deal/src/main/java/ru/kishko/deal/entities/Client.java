@@ -6,10 +6,10 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import ru.kishko.deal.jsonb.EmploymentJsonb;
-import ru.kishko.deal.jsonb.PassportJsonb;
+import ru.kishko.openapi.model.EmploymentDto;
 import ru.kishko.openapi.model.Gender;
 import ru.kishko.openapi.model.MaritalStatus;
+import ru.kishko.openapi.model.PassportDto;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -61,11 +61,11 @@ public class Client {
 
     @Type(type = "jsonb")
     @Column(name = "passport")
-    private PassportJsonb passport;
+    private PassportDto passport;
 
     @Type(type = "jsonb")
     @Column(name = "employment")
-    private EmploymentJsonb employment;
+    private EmploymentDto employment;
 
     @Column(name = "account_number")
     private String accountNumber;

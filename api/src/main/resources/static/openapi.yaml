@@ -414,6 +414,32 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PaymentScheduleElementDto'
+    PassportDto:
+      type: object
+      properties:
+        series:
+          type: string
+        number:
+          type: string
+        issueBranch:
+          type: string
+        issueDate:
+          type: string
+          format: date
+    StatusHistoryDto:
+      type: object
+      properties:
+        status:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/ApplicationStatus'
+        timestamp:
+          type: string
+          format: date-time
+        changeType:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/ChangeType'
     Gender:
       type: string
       enum:

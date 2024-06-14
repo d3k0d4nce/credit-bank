@@ -6,12 +6,13 @@ import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import ru.kishko.deal.jsonb.StatusHistoryJsonb;
 import ru.kishko.openapi.model.ApplicationStatus;
 import ru.kishko.openapi.model.LoanOfferDto;
+import ru.kishko.openapi.model.StatusHistoryDto;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -46,21 +47,21 @@ public class Statement {
     private ApplicationStatus applicationStatus;
 
     @Column(name = "creation_date", updatable = false)
-    private Timestamp creationDate;
+    private LocalDateTime creationDate;
 
     @Type(type = "jsonb")
     @Column(name = "applied_offer")
     private LoanOfferDto appliedOffer;
 
     @Column(name = "sign_date")
-    private Timestamp signDate;
+    private LocalDateTime signDate;
 
     @Column(name = "ses_code")
     private Integer sesCode;
 
     @Type(type = "jsonb")
     @Column(name = "status_history")
-    private List<StatusHistoryJsonb> statusHistory;
+    private List<StatusHistoryDto> statusHistory;
 
     @Override
     public boolean equals(Object o) {

@@ -3,12 +3,12 @@ package ru.kishko.deal.services.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.kishko.deal.jsonb.EmploymentJsonb;
-import ru.kishko.deal.jsonb.PassportJsonb;
 import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.repositories.ClientRepository;
 import ru.kishko.deal.services.ClientService;
+import ru.kishko.openapi.model.EmploymentDto;
 import ru.kishko.openapi.model.LoanStatementRequestDto;
+import ru.kishko.openapi.model.PassportDto;
 
 @Slf4j
 @Service
@@ -26,11 +26,11 @@ public class ClientServiceImpl implements ClientService {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .middleName(request.getMiddleName())
-                .passport(PassportJsonb.builder()
+                .passport(PassportDto.builder()
                         .series(request.getPassportSeries())
                         .number(request.getPassportNumber())
                         .build())
-                .employment(EmploymentJsonb.builder()
+                .employment(EmploymentDto.builder()
                         .build())
                 .build();
 
