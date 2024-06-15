@@ -17,7 +17,7 @@ public class Utils {
 
     private final FeignControllerClient feignControllerClient;
 
-    List<LoanOfferDto> getLoanOffers(LoanStatementRequestDto request) {
+    public List<LoanOfferDto> getLoanOffers(LoanStatementRequestDto request) {
         log.info("Fetching loan offers from external service.");
         return feignControllerClient.getLoanOffers(request);
     }
