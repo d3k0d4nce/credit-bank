@@ -34,7 +34,7 @@ public class CalculatorOfferServiceImpl implements CalculatorOfferService {
         return Stream.of(true, false)
                 .flatMap(isSalaryClient -> Stream.of(true, false)
                         .map(isInsuranceEnabled -> createLoanOffer(request, isSalaryClient, isInsuranceEnabled)))
-                .sorted(Comparator.comparing(LoanOfferDto::getRate).reversed())
+                .sorted(Comparator.comparing(LoanOfferDto::getTotalAmount))
                 .collect(Collectors.toList());
     }
 

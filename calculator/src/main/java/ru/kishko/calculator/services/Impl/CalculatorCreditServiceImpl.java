@@ -85,10 +85,10 @@ public class CalculatorCreditServiceImpl implements CalculatorCreditService {
                     PaymentScheduleElementDto.builder()
                             .number(i)
                             .date(startDate)
-                            .totalPayment(totalPayment)
-                            .interestPayment(interestPayment)
-                            .debtPayment(debtPayment)
-                            .remainingDebt(remainingDebt)
+                            .totalPayment(totalPayment.setScale(2, RoundingMode.HALF_UP))
+                            .interestPayment(interestPayment.setScale(2, RoundingMode.HALF_UP))
+                            .debtPayment(debtPayment.setScale(2, RoundingMode.HALF_UP))
+                            .remainingDebt(remainingDebt.setScale(2, RoundingMode.HALF_UP))
                             .build()
             );
         }
@@ -98,7 +98,7 @@ public class CalculatorCreditServiceImpl implements CalculatorCreditService {
     }
 
     private BigDecimal calculateInterestPayment(BigDecimal remainingDebt, BigDecimal rate) {
-        return remainingDebt.multiply(rate.divide(BigDecimal.valueOf(12 * 100), 5, RoundingMode.HALF_UP));
+        return remainingDebt.multiply(rate.divide(BigDecimal.valueOf(12 * 100), 7, RoundingMode.HALF_UP)).setScale(2, RoundingMode.HALF_UP);
     }
 
     private BigDecimal calculateDebtPayment(BigDecimal totalPayment, BigDecimal interestPayment) {
