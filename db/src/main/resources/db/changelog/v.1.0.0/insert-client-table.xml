@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet id="create-client-table" author="d3k0d4nce">
+        <insert tableName="client">
+            <column name="client_id" value="5d342110-e0e7-4c4c-ab50-0188d834d953"/>
+            <column name="last_name" value="Иванов"/>
+            <column name="first_name" value="Иван"/>
+            <column name="middle_name" value="Иванович"/>
+            <column name="birth_date" value="1980-01-01"/>
+            <column name="email" value="ivan.ivanov@example.com"/>
+            <column name="gender" value="MALE"/>
+            <column name="marital_status" value="MARRIED"/>
+            <column name="dependent_amount" value="2"/>
+            <column name="passport" value='{"series": "1234", "number": "567890", "issueBranch": "Отдел МВД по г. Москве", "issueDate": "2010-01-01"}'/>
+            <column name="employment" value='{"employmentStatus": "EMPLOYED", "employerINN": "771234567890", "salary": 100000, "position": "WORKER", "workExperienceTotal": 23, "workExperienceCurrent": 12}'/>
+            <column name="account_number" value="1234567890123456"/>
+        </insert>
+        <insert tableName="client">
+            <column name="client_id" value="6d342110-e0e7-4c4c-ab50-0188d834d954"/>
+            <column name="last_name" value="Петров"/>
+            <column name="first_name" value="Петр"/>
+            <column name="middle_name" value="Петрович"/>
+            <column name="birth_date" value="1985-02-02"/>
+            <column name="email" value="petr.petrov@example.com"/>
+            <column name="gender" value="MALE"/>
+            <column name="marital_status" value="SINGLE"/>
+            <column name="dependent_amount" value="0"/>
+            <column name="passport" value='{"series": "4567", "number": "123456", "issueBranch": "Отдел МВД по г. Санкт-Петербургу", "issueDate": "2015-02-02"}'/>
+            <column name="employment" value='{"employmentStatus": "SELF_EMPLOYED", "employerINN": "781234567890", "salary": 150000, "position": "OWNER", "workExperienceTotal": 23, "workExperienceCurrent": 10}'/>
+            <column name="account_number" value="9876543210123456"/>
+        </insert>
+        <insert tableName="client">
+            <column name="client_id" value="7d342110-e0e7-4c4c-ab50-0188d834d955"/>
+            <column name="last_name" value="Сидоров"/>
+            <column name="first_name" value="Сидор"/>
+            <column name="middle_name" value="Сидорович"/>
+            <column name="birth_date" value="1990-03-03"/>
+            <column name="email" value="sidr.sidorov@example.com"/>
+            <column name="gender" value="MALE"/>
+            <column name="marital_status" value="DIVORCED"/>
+            <column name="dependent_amount" value="1"/>
+            <column name="passport" value='{"series": "8901", "number": "234567", "issueBranch": "Отдел МВД по г. Новосибирску", "issueDate": "2020-03-03"}'/>
+            <column name="employment" value='{"employmentStatus": "BUSINESS_OWNER", "employerINN": "541234567890", "salary": 200000, "position": "TOP_MANAGER", "workExperienceTotal": 20, "workExperienceCurrent": 15}'/>
+            <column name="account_number" value="1011121314151617"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
