@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.kishko.calculator.exceptions.validators.AgeValidator;
+import ru.kishko.calculator.exceptions.validators.PassportIssueDateValidator;
 import ru.kishko.calculator.services.CalculatorCreditService;
 import ru.kishko.calculator.services.utils.LoanCalculator;
 import ru.kishko.calculator.services.utils.UserValidator;
@@ -28,10 +29,12 @@ public class CalculatorCreditServiceImpl implements CalculatorCreditService {
     private final UserValidator userValidator;
     private final LoanCalculator loanCalculator;
     private final AgeValidator ageValidator;
+    private final PassportIssueDateValidator passportIssueDateValidator;
 
     @Override
     public CreditDto calculateCredit(ScoringDataDto request) {
         ageValidator.validate(request);
+        passportIssueDateValidator.validate(request);
         log.info("Starting credit calculation for request: {}", request); // Логирование начала расчета
         return createCredit(request);
     }
@@ -74,12 +77,18 @@ public class CalculatorCreditServiceImpl implements CalculatorCreditService {
         BigDecimal interestPayment;
         BigDecimal debtPayment;
         BigDecimal rate = creditDto.getRate();
+        Integer term = creditDto.getTerm();
 
-        for (int i = 1; i <= creditDto.getTerm(); i++) {
+        for (int i = 1; i <= term; i++) {
             startDate = startDate.plusMonths(1);
             interestPayment = calculateInterestPayment(remainingDebt, rate);
             debtPayment = calculateDebtPayment(totalPayment, interestPayment);
             remainingDebt = calculateRemainingDebt(remainingDebt, debtPayment);
+
+            if (i == term) {
+                totalPayment = totalPayment.add(remainingDebt);
+                remainingDebt = BigDecimal.valueOf(0);
+            }
 
             paymentSchedule.add(
                     PaymentScheduleElementDto.builder()

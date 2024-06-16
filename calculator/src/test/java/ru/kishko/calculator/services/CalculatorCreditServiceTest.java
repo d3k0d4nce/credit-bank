@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.kishko.calculator.exceptions.validators.AgeValidator;
+import ru.kishko.calculator.exceptions.validators.PassportIssueDateValidator;
 import ru.kishko.calculator.services.Impl.CalculatorCreditServiceImpl;
 import ru.kishko.calculator.services.utils.LoanCalculator;
 import ru.kishko.calculator.services.utils.UserValidator;
@@ -28,6 +29,9 @@ class CalculatorCreditServiceTest {
 
     @MockBean
     private  AgeValidator ageValidator;
+
+    @MockBean
+    private PassportIssueDateValidator passportIssueDateValidator;
 
     @Autowired
     private CalculatorCreditServiceImpl calculatorCreditService;
