@@ -23,12 +23,14 @@ public class StatementController implements StatementApi {
 
     @Override
     public ResponseEntity<Void> statementOfferPost(LoanOfferDto loanOfferDto) {
+        log.info("statementOfferPost() loanOfferDTO = {}", loanOfferDto);
         statementService.statementOfferPost(loanOfferDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<LoanOfferDto>> statementPost(LoanStatementRequestDto loanStatementRequestDto) {
+        log.info("statementPost() loanStatementRequestDto = {}", loanStatementRequestDto);
         return new ResponseEntity<>(statementService.statementPost(loanStatementRequestDto), HttpStatus.OK);
     }
 }

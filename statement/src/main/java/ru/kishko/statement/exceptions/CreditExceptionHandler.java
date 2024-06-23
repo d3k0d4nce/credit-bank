@@ -24,6 +24,7 @@ public class CreditExceptionHandler {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
+        log.error("Validation exception occurred: {}", errors); // Логирование ошибки валидации
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
@@ -36,12 +37,13 @@ public class CreditExceptionHandler {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
+        log.error("Method argument not valid exception occurred: {}", errors); // Логирование ошибки валидации
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(FeignException.class)
     public ResponseEntity<Object> handleFeignException(FeignException feignException) {
-        log.error("Credit exception occurred: ", feignException);
+        log.error("Credit exception occurred: ", feignException); // Логирование ошибки Feign
         Exception exception = new Exception(
                 feignException.getMessage(),
                 feignException.getCause(),

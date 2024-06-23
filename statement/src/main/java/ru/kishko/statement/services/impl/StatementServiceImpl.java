@@ -28,6 +28,7 @@ public class StatementServiceImpl implements StatementService {
     @Override
     public List<LoanOfferDto> statementPost(LoanStatementRequestDto request) {
         ageValidator.validate(request);
+        log.info("statementPost() loanStatementRequestDto = {}", request);
         return feignControllerClient.dealStatementPost(request);
     }
 }
