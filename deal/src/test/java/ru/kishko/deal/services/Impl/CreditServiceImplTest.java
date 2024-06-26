@@ -7,12 +7,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.kishko.deal.entities.Credit;
+import ru.kishko.deal.mappers.CreditMapper;
 import ru.kishko.deal.repositories.CreditRepository;
 import ru.kishko.openapi.model.CreditDto;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -21,6 +22,9 @@ class CreditServiceImplTest {
 
     @Mock
     private CreditRepository creditRepository;
+
+    @Mock
+    private CreditMapper creditMapper;
 
     @InjectMocks
     private CreditServiceImpl creditService;
@@ -43,6 +47,7 @@ class CreditServiceImplTest {
 
     @Test
     void createCredit() {
+        when(creditMapper.toCredit(any(CreditDto.class))).thenReturn(expectedCredit);
         when(creditRepository.save(any(Credit.class))).thenReturn(expectedCredit);
         Credit actualCredit = creditService.createCredit(request);
 

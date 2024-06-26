@@ -9,7 +9,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Credit;
 import ru.kishko.deal.entities.Statement;
-import ru.kishko.deal.exceptions.validators.AgeValidator;
 import ru.kishko.deal.exceptions.validators.PassportIssueDateValidator;
 import ru.kishko.deal.services.ClientService;
 import ru.kishko.deal.services.CreditService;
@@ -39,9 +38,6 @@ class DealServiceImplTest {
 
     @Mock
     private PassportIssueDateValidator passportIssueDateValidator;
-
-    @Mock
-    private AgeValidator ageValidator;
 
     @Mock
     private Utils utils;

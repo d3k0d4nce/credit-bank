@@ -1,13 +1,13 @@
-package ru.kishko.deal.exceptions.validators;
+package ru.kishko.statement.exceptions.validators;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import ru.kishko.deal.exceptions.ValidationException;
 import ru.kishko.openapi.model.LoanStatementRequestDto;
 import ru.kishko.openapi.model.ScoringDataDto;
+import ru.kishko.statement.exceptions.ValidationException;
 
 import java.time.LocalDate;
 import java.time.Period;

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kishko.deal.exceptions.validators.AgeValidator;
 import ru.kishko.deal.exceptions.validators.PassportIssueDateValidator;
 import ru.kishko.deal.services.DealService;
 import ru.kishko.deal.entities.Client;
@@ -27,13 +26,11 @@ public class DealServiceImpl implements DealService {
     private final StatementService statementService;
     private final CreditService creditService;
     private final PassportIssueDateValidator passportIssueDateValidator;
-    private final AgeValidator ageValidator;
     private final Utils utils;
 
     @Override
     @Transactional
     public List<LoanOfferDto> getLoanOffers(LoanStatementRequestDto request) {
-        ageValidator.validate(request);
         log.info("Getting loan offers for request: {}", request);
         Client client = clientService.createClient(request);
         Statement statement = statementService.createStatement(client);

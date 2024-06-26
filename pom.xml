@@ -7,6 +7,7 @@
 		<module>deal</module>
 		<module>api</module>
 		<module>db</module>
+		<module>statement</module>
 	</modules>
 
 	<packaging>pom</packaging>

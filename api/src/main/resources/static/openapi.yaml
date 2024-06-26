@@ -5,6 +5,7 @@ info:
 servers:
   - url: http://localhost:8080
   - url: http://localhost:8081
+  - url: http://localhost:8082
 paths:
   /calculator/offers:
     post:
@@ -84,6 +85,38 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/FinishRegistrationRequestDto'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+  /statement:
+    post:
+      summary: Прескоринг + запрос на расчёт возможных условий кредита
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanStatementRequestDto'
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOfferDto'
+        '400':
+          description: Bad Request
+  /statement/offer:
+    post:
+      summary: Выбор одного из предложений
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanOfferDto'
       responses:
         '204':
           description: No Content
