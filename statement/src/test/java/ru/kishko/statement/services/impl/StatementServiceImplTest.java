@@ -11,10 +11,9 @@ import ru.kishko.openapi.model.LoanStatementRequestDto;
 import ru.kishko.statement.exceptions.validators.AgeValidator;
 import ru.kishko.statement.utils.FeignControllerClient;
 
-import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
