@@ -7,10 +7,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.kishko.deal.entities.Client;
+import ru.kishko.deal.mappers.ClientMapper;
 import ru.kishko.deal.repositories.ClientRepository;
 import ru.kishko.openapi.model.LoanStatementRequestDto;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -19,6 +20,9 @@ class ClientServiceImplTest {
 
     @Mock
     private ClientRepository clientRepository;
+
+    @Mock
+    private ClientMapper clientMapper;
 
     @InjectMocks
     private ClientServiceImpl clientService;
@@ -39,6 +43,7 @@ class ClientServiceImplTest {
 
     @Test
     void createClient() {
+        when(clientMapper.toClient(any(LoanStatementRequestDto.class))).thenReturn(expectedClient);
         when(clientRepository.save(any(Client.class))).thenReturn(expectedClient);
         Client actualClient = clientService.createClient(request);
 

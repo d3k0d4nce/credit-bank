@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.kishko.deal.entities.Statement;
+import ru.kishko.deal.mappers.ScoringDataMapper;
 import ru.kishko.openapi.model.*;
 
 import java.util.Collections;
@@ -21,6 +22,9 @@ class UtilsTest {
 
     @Mock
     private FeignControllerClient feignControllerClient;
+
+    @Mock
+    private ScoringDataMapper scoringDataMapper;
 
     @InjectMocks
     private Utils utils;

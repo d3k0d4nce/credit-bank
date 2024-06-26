@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kishko.deal.entities.Credit;
+import ru.kishko.deal.mappers.CreditMapper;
 import ru.kishko.deal.repositories.CreditRepository;
 import ru.kishko.deal.services.CreditService;
 import ru.kishko.openapi.model.CreditDto;
-import ru.kishko.openapi.model.CreditStatus;
 
 @Slf4j
 @Service
@@ -15,22 +15,12 @@ import ru.kishko.openapi.model.CreditStatus;
 public class CreditServiceImpl implements CreditService {
 
     private final CreditRepository creditRepository;
+    private final CreditMapper creditMapper;
 
     @Override
     public Credit createCredit(CreditDto creditDto) {
         log.info("Creating new credit with data: {}", creditDto);
-        Credit credit = Credit.builder()
-                .creditStatus(CreditStatus.CALCULATED)
-                .amount(creditDto.getAmount())
-                .psk(creditDto.getPsk())
-                .isInsuranceEnabled(creditDto.getIsInsuranceEnabled())
-                .isSalaryClient(creditDto.getIsSalaryClient())
-                .monthlyPayment(creditDto.getMonthlyPayment())
-                .paymentSchedule(creditDto.getPaymentSchedule())
-                .rate(creditDto.getRate())
-                .term(creditDto.getTerm())
-                .build();
-
+        Credit credit = creditMapper.toCredit(creditDto);
         credit = creditRepository.save(credit);
         log.info("Credit created: {}", credit);
         return credit;
