@@ -122,6 +122,72 @@ paths:
           description: No Content
         '400':
           description: Bad Request
+  /deal/document/{statementId}/send:
+    post:
+      summary: Отправка запроса на получение документов
+      operationId: sendRequestForDocument
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Неверный идентификатор заявки
+        '404':
+          description: Заявка не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+  /deal/document/{statementId}/sign:
+    post:
+      summary: Отправка запроса на подписание документов
+      operationId: sendRequestForSignDocument
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Неверный идентификатор заявки
+        '404':
+          description: Заявка не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+  /deal/document/{statementId}/{code}:
+    post:
+      summary: Подписание документов
+      operationId: signDocument
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+        - in: path
+          name: code
+          schema:
+            type: integer
+          required: true
+          description: SES-код
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Неверный идентификатор заявки
+        '404':
+          description: Заявка не найдена
+        '500':
+          description: Внутренняя ошибка сервера
 components:
   schemas:
     LoanStatementRequestDto:
@@ -473,6 +539,30 @@ components:
           type: string
           allOf:
             - $ref: '#/components/schemas/ChangeType'
+    EmailMessage:
+      type: object
+      properties:
+        address:
+          type: string
+          format: email
+          description: Адрес электронной почты получателя
+        theme:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/Theme'
+        statementId:
+          type: string
+          format: uuid
+          description: Идентификатор заявки
+    Theme:
+      type: string
+      enum:
+        - FINISH_REGISTRATION
+        - CREATE_DOCUMENT
+        - YOUR_LOAN_DOCUMENTS
+        - SIGN_DOCUMENTS_WITH_SES_CODE
+        - CREDIT_ISSUED
+        - APPLICATION_DENIED
     Gender:
       type: string
       enum:
