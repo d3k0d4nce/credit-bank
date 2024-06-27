@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.4
+    env_file:
+      - kafka.env
+    ports:
+      - "22181:2181"
+  kafka:
+    image: confluentinc/cp-kafka:7.4.4
+    depends_on:
+      - zookeeper
+    ports:
+      - "9093:9093"
+      - "9092:9092"
+    env_file:
+      - kafka.env
