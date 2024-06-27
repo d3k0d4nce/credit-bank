@@ -8,6 +8,7 @@
 		<module>api</module>
 		<module>db</module>
 		<module>statement</module>
+		<module>dossier</module>
 	</modules>
 
 	<packaging>pom</packaging>
