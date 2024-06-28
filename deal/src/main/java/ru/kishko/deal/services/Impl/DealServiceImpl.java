@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kishko.deal.entities.Credit;
 import ru.kishko.deal.exceptions.validators.PassportIssueDateValidator;
 import ru.kishko.deal.services.DealService;
 import ru.kishko.deal.entities.Client;
@@ -55,10 +56,28 @@ public class DealServiceImpl implements DealService {
         Statement statement = statementService.getStatementById(UUID.fromString(statementId));
         ScoringDataDto scoringData = utils.makeScoringDataDto(statement, request);
         log.info("Scoring data created: {}", scoringData);
-        CreditDto credit = utils.calculateCredit(scoringData);
-        log.info("Credit data calculated: {}", credit);
-        creditService.createCredit(credit);
-        statementService.updateStatusAndStatusHistory(statement);
+        CreditDto creditDto = utils.calculateCredit(scoringData);
+        log.info("Credit data calculated: {}", creditDto);
+        Credit credit = creditService.createCredit(creditDto);
+        log.info("Credit created: {}", credit);
+        statement = statementService.updateStatusAndStatusHistory(statement);
+        statementService.updateStatementByCreditInfo(statement, credit);
+        clientService.updateClientFromRequest(statement, request);
         log.info("Loan calculated and credit created successfully.");
+    }
+
+    @Override
+    public void sendRequestForDocument(String statementId) {
+
+    }
+
+    @Override
+    public void updateApplicationSesCode(String statementId) {
+
+    }
+
+    @Override
+    public void verifySesCode(String statementId, Integer code) {
+
     }
 }

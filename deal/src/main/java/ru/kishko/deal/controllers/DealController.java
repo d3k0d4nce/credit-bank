@@ -45,4 +45,22 @@ public class DealController implements DealApi {
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<Void> sendRequestForDocument(String statementId) {
+        dealService.sendRequestForDocument(statementId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> sendRequestForSignDocument(String statementId) {
+        dealService.updateApplicationSesCode(statementId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> signDocument(String statementId, Integer code) {
+        dealService.verifySesCode(statementId, code);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

@@ -134,7 +134,6 @@ class DealServiceImplTest {
                 .thenReturn(expectedScoringData);
         when(utils.calculateCredit(any(ScoringDataDto.class))).thenReturn(expectedCredit);
         when(creditService.createCredit(any(CreditDto.class))).thenReturn(new Credit());
-        doNothing().when(statementService).updateStatusAndStatusHistory(expectedStatement);
 
         dealService.calculateLoan(uuid.toString(), request);
 

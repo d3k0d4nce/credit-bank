@@ -1,6 +1,7 @@
 package ru.kishko.deal.services;
 
 import ru.kishko.deal.entities.Client;
+import ru.kishko.deal.entities.Credit;
 import ru.kishko.deal.entities.Statement;
 import ru.kishko.openapi.model.LoanOfferDto;
 
@@ -13,5 +14,7 @@ public interface StatementService {
 
     void updateStatement(Statement statement, LoanOfferDto request);
 
-    void updateStatusAndStatusHistory(Statement statement);
+    Statement updateStatusAndStatusHistory(Statement statement);
+
+    void updateStatementByCreditInfo(Statement statement, Credit credit);
 }
