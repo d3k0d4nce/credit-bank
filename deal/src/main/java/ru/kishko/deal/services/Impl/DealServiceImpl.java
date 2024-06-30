@@ -99,4 +99,17 @@ public class DealServiceImpl implements DealService {
             kafkaService.sendToCreditIssuedTopic(statementId);
         }
     }
+
+    @Override
+    public Integer dealDossierStatementGet(String statementId) {
+        Statement statement = statementService.getStatementById(UUID.fromString(statementId));
+        return statement.getSesCode();
+    }
+
+    @Override
+    public void updateApplicationStatus(String statementId) {
+        Statement statement = statementService.getStatementById(UUID.fromString(statementId));
+        statementService.updateStatusAndStatusHistory(statement, ApplicationStatus.DOCUMENT_CREATED,
+                ChangeType.AUTOMATIC);
+    }
 }

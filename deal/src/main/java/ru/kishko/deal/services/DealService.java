@@ -18,4 +18,8 @@ public interface DealService {
     void updateApplicationSesCode(String statementId);
 
     void verifySesCode(String statementId, Integer code);
+
+    Integer dealDossierStatementGet(String statementId);
+
+    void updateApplicationStatus(String statementId);
 }

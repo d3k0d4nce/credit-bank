@@ -63,4 +63,15 @@ public class DealController implements DealApi {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<Integer> dealDossierStatementGet(String statementId) {
+        Integer result = dealService.dealDossierStatementGet(statementId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> dealDossierStatementStatusPut(String statementId) {
+        dealService.updateApplicationStatus(statementId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
