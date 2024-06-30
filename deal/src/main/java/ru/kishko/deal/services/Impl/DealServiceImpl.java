@@ -61,6 +61,7 @@ public class DealServiceImpl implements DealService {
             creditDto = utils.calculateCredit(scoringData);
         } catch (FeignException e) {
             statementService.updateStatusAndStatusHistory(statement, ApplicationStatus.CC_DENIED, ChangeType.AUTOMATIC);
+            log.error("Error calculating credit for statementId: {}", statementId, e);
             throw e;
         }
         log.info("Credit data calculated: {}", creditDto);

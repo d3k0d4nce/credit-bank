@@ -41,36 +41,42 @@ public class KafkaServiceImpl implements KafkaService {
 
     @Override
     public void sendToFinishRegistrationTopic(String statementId) {
+        log.info("Sending message to finishRegistrationTopic for statementId: {}", statementId);
         EmailMessage emailMessage = createEmailMessage(statementId, Theme.FINISH_REGISTRATION);
         emailKafkaTemplate.send(finishRegistrationTopic, emailMessage);
     }
 
     @Override
     public void sendToCreateDocumentsTopic(String statementId) {
+        log.info("Sending message to createDocumentsTopic for statementId: {}", statementId);
         EmailMessage emailMessage = createEmailMessage(statementId, Theme.CREATE_DOCUMENT);
         emailKafkaTemplate.send(createDocumentsTopic, emailMessage);
     }
 
     @Override
     public void sendToSendSesTopic(String statementId) {
+        log.info("Sending message to sendSesTopic for statementId: {}", statementId);
         EmailMessage emailMessage = createEmailMessage(statementId, Theme.SIGN_DOCUMENTS_WITH_SES_CODE);
         emailKafkaTemplate.send(sendSesTopic, emailMessage);
     }
 
     @Override
     public void sendToSendDocumentsTopic(String statementId) {
+        log.info("Sending message to sendDocumentsTopic for statementId: {}", statementId);
         EmailMessage emailMessage = createEmailMessage(statementId, Theme.YOUR_LOAN_DOCUMENTS);
         emailKafkaTemplate.send(sendDocumentsTopic, emailMessage);
     }
 
     @Override
     public void sendToCreditIssuedTopic(String statementId) {
+        log.info("Sending message to creditIssuedTopic for statementId: {}", statementId);
         EmailMessage emailMessage = createEmailMessage(statementId, Theme.CREDIT_ISSUED);
         emailKafkaTemplate.send(creditIssuedTopic, emailMessage);
     }
 
     @Override
     public void sendToApplicationDeniedTopic(String statementId) {
+        log.info("Sending message to statementDeniedTopic for statementId: {}", statementId);
         EmailMessage emailMessage = createEmailMessage(statementId, Theme.APPLICATION_DENIED);
         emailKafkaTemplate.send(statementDeniedTopic, emailMessage);
     }
