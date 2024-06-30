@@ -188,6 +188,48 @@ paths:
           description: Заявка не найдена
         '500':
           description: Внутренняя ошибка сервера
+  /deal/dossier/statement/status:
+    put:
+      summary: Update application status
+      description: Updates the status of an application.
+      parameters:
+        - in: query
+          name: statementId
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: Application status updated successfully.
+        '400':
+          description: Bad request.
+        '404':
+          description: Application not found.
+        '500':
+          description: Internal server error.
+  /deal/dossier/statement:
+    get:
+      summary: Get SES code by statement ID
+      description: Retrieves the SES code for a given statement ID.
+      parameters:
+        - in: query
+          name: statementId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: SES code retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: integer
+        '400':
+          description: Bad request.
+        '404':
+          description: Statement not found.
+        '500':
+          description: Internal server error.
 components:
   schemas:
     LoanStatementRequestDto:
