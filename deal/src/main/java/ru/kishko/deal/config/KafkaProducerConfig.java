@@ -51,12 +51,12 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, EmailMessage> emailProducerFactory() {
+    public ProducerFactory<Integer, EmailMessage> emailProducerFactory() {
         return new DefaultKafkaProducerFactory<>(commonProducerConfig());
     }
 
     @Bean
-    public KafkaTemplate<String, EmailMessage> emailKafkaTemplate() {
+    public KafkaTemplate<Integer, EmailMessage> emailKafkaTemplate() {
         return new KafkaTemplate<>(emailProducerFactory());
     }
 
