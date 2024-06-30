@@ -12,6 +12,7 @@ import ru.kishko.deal.entities.Statement;
 import ru.kishko.deal.exceptions.validators.PassportIssueDateValidator;
 import ru.kishko.deal.services.ClientService;
 import ru.kishko.deal.services.CreditService;
+import ru.kishko.deal.services.KafkaService;
 import ru.kishko.deal.services.StatementService;
 import ru.kishko.deal.utils.Utils;
 import ru.kishko.openapi.model.*;
@@ -41,6 +42,9 @@ class DealServiceImplTest {
 
     @Mock
     private Utils utils;
+
+    @Mock
+    private KafkaService kafkaService;
 
     @InjectMocks
     private DealServiceImpl dealService;
@@ -141,7 +145,7 @@ class DealServiceImplTest {
         verify(utils, times(1)).makeScoringDataDto(expectedStatement, request);
         verify(utils, times(1)).calculateCredit(any(ScoringDataDto.class));
         verify(creditService, times(1)).createCredit(expectedCredit);
-        verify(statementService, times(1)).updateStatusAndStatusHistory(expectedStatement);
+        verify(statementService, times(1)).updateStatusAndStatusHistory(expectedStatement, ApplicationStatus.CC_APPROVED, ChangeType.AUTOMATIC);
 
     }
 }

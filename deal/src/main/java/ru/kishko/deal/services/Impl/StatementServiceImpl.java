@@ -7,10 +7,12 @@ import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Credit;
 import ru.kishko.deal.entities.Statement;
 import ru.kishko.deal.exceptions.StatementNotFoundException;
-import ru.kishko.deal.mappers.CreditMapper;
 import ru.kishko.deal.repositories.StatementRepository;
 import ru.kishko.deal.services.StatementService;
-import ru.kishko.openapi.model.*;
+import ru.kishko.openapi.model.ApplicationStatus;
+import ru.kishko.openapi.model.ChangeType;
+import ru.kishko.openapi.model.LoanOfferDto;
+import ru.kishko.openapi.model.StatusHistoryDto;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -25,7 +27,6 @@ import java.util.UUID;
 public class StatementServiceImpl implements StatementService {
 
     private final StatementRepository statementRepository;
-    private final CreditMapper creditMapper;
 
     @Override
     public Statement createStatement(Client client) {
@@ -61,9 +62,9 @@ public class StatementServiceImpl implements StatementService {
     }
 
     @Override
-    public Statement updateStatusAndStatusHistory(Statement statement) {
+    public Statement updateStatusAndStatusHistory(Statement statement, ApplicationStatus applicationStatus, ChangeType changeType) {
         log.info("Updating statement status and history: {}", statement);
-        StatusHistoryDto statusHistoryJsonb = createStatusHistoryJsonb(ApplicationStatus.CC_APPROVED, ChangeType.AUTOMATIC);
+        StatusHistoryDto statusHistoryJsonb = createStatusHistoryJsonb(applicationStatus, changeType);
         addStatusHistory(statement, statusHistoryJsonb);
         statement.setApplicationStatus(statusHistoryJsonb.getStatus());
         statementRepository.save(statement);
@@ -84,9 +85,15 @@ public class StatementServiceImpl implements StatementService {
     public void updateStatementByCreditInfo(Statement statement, Credit credit) {
         statement.setCredit(credit);
         statement.setSignDate(LocalDateTime.now());
+        statementRepository.save(statement);
+        log.info("Statement credit and signDate updated.");
+    }
+
+    @Override
+    public void updateStatementSesCode(String statementId) {
+        Statement statement = getStatementById(UUID.fromString(statementId));
         statement.setSesCode(getRandomNumber());
         statementRepository.save(statement);
-        log.info("Statement sesCode, credit and signDate updated.");
     }
 
     private void addStatusHistory(Statement statement, StatusHistoryDto statusHistoryJsonb) {
