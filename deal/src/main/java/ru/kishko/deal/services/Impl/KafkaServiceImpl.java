@@ -19,7 +19,7 @@ import java.util.UUID;
 public class KafkaServiceImpl implements KafkaService {
 
     private final StatementService statementService;
-    private final KafkaTemplate<String, EmailMessage> emailKafkaTemplate;
+    private final KafkaTemplate<Integer, EmailMessage> emailKafkaTemplate;
 
     @Value("${kafka.topic.finishRegistration}")
     private String finishRegistrationTopic;
