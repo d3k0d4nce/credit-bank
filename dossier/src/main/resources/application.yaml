@@ -1,1 +1,22 @@
-spring.application.name=dossier
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    common-group-id: notificationId
+  mail:
+    host: smtp.mail.ru
+    port: 465
+    username: bebriki.2024@mail.ru
+    password: MpcfnG6FK7r3bdgTeChg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            trust: "*"
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+
+server:
+  port: 8083
