@@ -5,11 +5,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Credit;
+import ru.kishko.deal.entities.Statement;
 import ru.kishko.deal.exceptions.validators.PassportIssueDateValidator;
 import ru.kishko.deal.services.*;
-import ru.kishko.deal.entities.Client;
-import ru.kishko.deal.entities.Statement;
 import ru.kishko.deal.utils.Utils;
 import ru.kishko.openapi.model.*;
 
