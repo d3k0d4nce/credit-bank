@@ -1,8 +1,6 @@
 package ru.kishko.dossier.strategy;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -18,14 +16,16 @@ import java.io.IOException;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
-public class SendDocuments implements EmailSendStrategy {
+public class SendDocuments extends AbstractEmailSender {
 
-    @Value("${spring.mail.username}")
-    private String fromAddress;
     private final FileService fileService;
-    private final JavaMailSender mailSender;
     private final FeignControllerClient feignControllerClient;
+
+    public SendDocuments(JavaMailSender mailSender, FileService fileService, FeignControllerClient feignControllerClient) {
+        super(mailSender);
+        this.fileService = fileService;
+        this.feignControllerClient = feignControllerClient;
+    }
 
     @Override
     public void sendMail(EmailMessage emailMessage) {
@@ -37,7 +37,7 @@ public class SendDocuments implements EmailSendStrategy {
             helper.setFrom(fromAddress);
             helper.setTo(emailMessage.getAddress());
             helper.setSubject(emailMessage.getTheme().name());
-            helper.setText("Здравствуйте, отправляем вам пакет документов для оформления кредита.");
+            helper.setText(getEmailText(emailMessage));
 
             File file = fileService.createCreditFile(String.valueOf(emailMessage.getStatementId()));
             helper.addAttachment("credit-file.txt", file);
@@ -49,6 +49,11 @@ public class SendDocuments implements EmailSendStrategy {
         } catch (MessagingException | IOException e) {
             log.error("Error sending email with documents for statementId: {}", emailMessage.getStatementId(), e);
         }
+    }
+
+    @Override
+    protected String getEmailText(EmailMessage emailMessage) {
+        return "Здравствуйте, отправляем вам пакет документов для оформления кредита.";
     }
 
     @Override

@@ -1,10 +1,7 @@
 package ru.kishko.dossier.strategy;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import ru.kishko.dossier.utils.FeignControllerClient;
@@ -13,28 +10,20 @@ import ru.kishko.openapi.model.Theme;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
-public class SignDocuments implements EmailSendStrategy {
+public class SignDocuments extends AbstractEmailSender {
 
-    @Value("${spring.mail.username}")
-    private String fromAddress;
-    private final JavaMailSender mailSender;
     private final FeignControllerClient feignControllerClient;
 
+    @Autowired
+    public SignDocuments(JavaMailSender mailSender, FeignControllerClient feignControllerClient) {
+        super(mailSender);
+        this.feignControllerClient = feignControllerClient;
+    }
+
     @Override
-    public void sendMail(EmailMessage emailMessage) {
-        try {
-            Integer sesCode = feignControllerClient.getSesCodeByStatementId(String.valueOf(emailMessage.getStatementId()));
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom(fromAddress);
-            mailMessage.setTo(emailMessage.getAddress());
-            mailMessage.setSubject(emailMessage.getTheme().name());
-            mailMessage.setText("Здравствуйте, ваш код для подписания документов: " + sesCode);
-            mailSender.send(mailMessage);
-        } catch (MailException e) {
-            log.error("Ошибка отправки письма:", e);
-            throw e;
-        }
+    protected String getEmailText(EmailMessage emailMessage) {
+        Integer sesCode = feignControllerClient.getSesCodeByStatementId(String.valueOf(emailMessage.getStatementId()));
+        return "Здравствуйте, ваш код для подписания документов: " + sesCode;
     }
 
     @Override

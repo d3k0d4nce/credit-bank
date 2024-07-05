@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import ru.kishko.dossier.services.EmailService;
-import ru.kishko.openapi.model.EmailMessage;;
+import ru.kishko.openapi.model.EmailMessage;
 
 @Slf4j
 @Component
