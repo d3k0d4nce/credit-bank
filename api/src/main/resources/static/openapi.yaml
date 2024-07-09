@@ -373,7 +373,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Statement'
+                $ref: '#/components/schemas/StatementEntityDto'
         '404':
           description: Заявка не найдена
   /deal/admin/statement:
@@ -387,7 +387,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Statement'
+                  $ref: '#/components/schemas/StatementEntityDto'
 components:
   schemas:
     LoanStatementRequestDto:
@@ -812,7 +812,7 @@ components:
         - CLIENT_DENIED
         - DOCUMENT_SIGNED
         - CREDIT_ISSUED
-    Statement:
+    StatementEntityDto:
       type: object
       properties:
         statementId:
@@ -820,9 +820,9 @@ components:
           format: uuid
           description: ID заявки
         client:
-          $ref: '#/components/schemas/Client'
+          $ref: '#/components/schemas/ClientEntityDto'
         credit:
-          $ref: '#/components/schemas/Credit'
+          $ref: '#/components/schemas/CreditEntityDto'
         applicationStatus:
           type: string
           allOf:
@@ -845,7 +845,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StatusHistoryDto'
-    Client:
+    ClientEntityDto:
       type: object
       properties:
         clientId:
@@ -871,10 +871,8 @@ components:
           description: Email клиента
         gender:
           type: string
-          description: Пол клиента
-          enum:
-            - MALE
-            - FEMALE
+          allOf:
+            - $ref: '#/components/schemas/Gender'
         maritalStatus:
           type: string
           allOf:
@@ -890,7 +888,7 @@ components:
         accountNumber:
           type: string
           description: Номер счета клиента
-    Credit:
+    CreditEntityDto:
       type: object
       properties:
         creditId:

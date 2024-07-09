@@ -29,6 +29,11 @@ public class StatementServiceImpl implements StatementService {
     private final StatementRepository statementRepository;
 
     @Override
+    public List<Statement> getAllStatements() {
+        return statementRepository.findAll();
+    }
+
+    @Override
     public Statement createStatement(Client client) {
         log.info("Creating new statement for client: {}", client);
         Statement statement = Statement.builder()

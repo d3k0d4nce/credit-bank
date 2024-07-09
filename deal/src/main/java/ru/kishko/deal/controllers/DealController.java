@@ -11,7 +11,7 @@ import ru.kishko.openapi.api.DealApi;
 import ru.kishko.openapi.model.FinishRegistrationRequestDto;
 import ru.kishko.openapi.model.LoanOfferDto;
 import ru.kishko.openapi.model.LoanStatementRequestDto;
-import ru.kishko.openapi.model.Statement;
+import ru.kishko.openapi.model.StatementEntityDto;
 
 import java.util.List;
 
@@ -83,12 +83,16 @@ public class DealController implements DealApi {
     }
 
     @Override
-    public ResponseEntity<List<Statement>> dealAdminStatementGet() {
-        return DealApi.super.dealAdminStatementGet();
+    public ResponseEntity<List<StatementEntityDto>> dealAdminStatementGet() {
+        log.info("Received request to get all statements");
+        List<StatementEntityDto> result = dealService.dealAdminStatementGet();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Statement> dealAdminStatementStatementIdGet(String statementId) {
-        return DealApi.super.dealAdminStatementStatementIdGet(statementId);
+    public ResponseEntity<StatementEntityDto> dealAdminStatementStatementIdGet(String statementId) {
+        log.info("Received request to get statement by statementId: {}", statementId);
+        StatementEntityDto result = dealService.dealAdminStatementStatementIdGet(statementId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
