@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 import ru.kishko.deal.services.DealService;
 import ru.kishko.openapi.api.DealApi;
 import ru.kishko.openapi.model.FinishRegistrationRequestDto;
@@ -45,4 +46,38 @@ public class DealController implements DealApi {
         return new ResponseEntity<>(offers, HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<Void> sendRequestForDocument(String statementId) {
+        log.info("Received request to send documents for statementId: {}", statementId);
+        dealService.sendRequestForDocument(statementId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> sendRequestForSignDocument(String statementId) {
+        log.info("Received request to send sign document request for statementId: {}", statementId);
+        dealService.updateApplicationSesCode(statementId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> signDocument(String statementId, Integer code) {
+        log.info("Received request to sign document for statementId: {} with code: {}", statementId, code);
+        dealService.verifySesCode(statementId, code);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Integer> dealDossierStatementGet(String statementId) {
+        log.info("Received request to get dossier statement for statementId: {}", statementId);
+        Integer result = dealService.dealDossierStatementGet(statementId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Void> dealDossierStatementStatusPut(String statementId) {
+        log.info("Received request to update dossier statement status for statementId: {}", statementId);
+        dealService.updateApplicationStatus(statementId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

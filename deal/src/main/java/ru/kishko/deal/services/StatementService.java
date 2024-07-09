@@ -1,7 +1,10 @@
 package ru.kishko.deal.services;
 
 import ru.kishko.deal.entities.Client;
+import ru.kishko.deal.entities.Credit;
 import ru.kishko.deal.entities.Statement;
+import ru.kishko.openapi.model.ApplicationStatus;
+import ru.kishko.openapi.model.ChangeType;
 import ru.kishko.openapi.model.LoanOfferDto;
 
 import java.util.UUID;
@@ -13,5 +16,9 @@ public interface StatementService {
 
     void updateStatement(Statement statement, LoanOfferDto request);
 
-    void updateStatusAndStatusHistory(Statement statement);
+    Statement updateStatusAndStatusHistory(Statement statement, ApplicationStatus applicationStatus, ChangeType changeType);
+
+    void updateStatementByCreditInfo(Statement statement, Credit credit);
+
+    void updateStatementSesCode(String statementId);
 }

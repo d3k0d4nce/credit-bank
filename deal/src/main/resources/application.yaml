@@ -15,6 +15,17 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
     enabled: true
+  kafka:
+    bootstrap-servers: localhost:9092
+
+kafka:
+  topic:
+    finishRegistration: finish-registration
+    createDocuments: create-documents
+    sendDocuments: send-documents
+    sendSes: send-ses
+    creditIssued: credit-issued
+    statementDenied: statement-denied
 
 server:
   port: 8081

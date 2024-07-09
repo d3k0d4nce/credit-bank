@@ -12,4 +12,14 @@ public interface DealService {
     void selectLoanOffer(LoanOfferDto request);
 
     void calculateLoan(String statementId, FinishRegistrationRequestDto request);
+
+    void sendRequestForDocument(String statementId);
+
+    void updateApplicationSesCode(String statementId);
+
+    void verifySesCode(String statementId, Integer code);
+
+    Integer dealDossierStatementGet(String statementId);
+
+    void updateApplicationStatus(String statementId);
 }
