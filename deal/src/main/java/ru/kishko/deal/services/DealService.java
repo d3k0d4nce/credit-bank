@@ -3,7 +3,7 @@ package ru.kishko.deal.services;
 import ru.kishko.openapi.model.FinishRegistrationRequestDto;
 import ru.kishko.openapi.model.LoanOfferDto;
 import ru.kishko.openapi.model.LoanStatementRequestDto;
-import ru.kishko.openapi.model.StatementEntityDto;
+import ru.kishko.openapi.model.StatementDto;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface DealService {
 
     void updateApplicationStatus(String statementId);
 
-    List<StatementEntityDto> dealAdminStatementGet();
+    List<StatementDto> dealAdminStatementGet();
 
-    StatementEntityDto dealAdminStatementStatementIdGet(String statementId);
+    StatementDto dealAdminStatementStatementIdGet(String statementId);
 }

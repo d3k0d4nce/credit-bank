@@ -121,14 +121,14 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public List<StatementEntityDto> dealAdminStatementGet() {
+    public List<StatementDto> dealAdminStatementGet() {
         log.info("Getting all statements");
         return statementService.getAllStatements().stream()
                 .map(statementMapper::toStatementEntityDto).toList();
     }
 
     @Override
-    public StatementEntityDto dealAdminStatementStatementIdGet(String statementId) {
+    public StatementDto dealAdminStatementStatementIdGet(String statementId) {
         log.info("Getting statement for statementId: {}", statementId);
         Statement statement = statementService.getStatementById(UUID.fromString(statementId));
         return statementMapper.toStatementEntityDto(statement);

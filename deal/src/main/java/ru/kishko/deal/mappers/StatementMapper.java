@@ -7,9 +7,9 @@ import org.mapstruct.factory.Mappers;
 import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Credit;
 import ru.kishko.deal.entities.Statement;
-import ru.kishko.openapi.model.ClientEntityDto;
-import ru.kishko.openapi.model.CreditEntityDto;
-import ru.kishko.openapi.model.StatementEntityDto;
+import ru.kishko.openapi.model.ClientDto;
+import ru.kishko.openapi.model.CreditDto;
+import ru.kishko.openapi.model.StatementDto;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -25,13 +25,13 @@ public interface StatementMapper {
     @Mapping(target = "credit", source = "credit", qualifiedByName = "creditToDto")
     @Mapping(target = "creationDate", source = "creationDate", qualifiedByName = "localDateTimeToOffsetDateTime")
     @Mapping(target = "signDate", source = "signDate", qualifiedByName = "localDateTimeToOffsetDateTime")
-    StatementEntityDto toStatementEntityDto(Statement statement);
+    StatementDto toStatementEntityDto(Statement statement);
 
     @Named("clientToDto")
-    ClientEntityDto toClientEntityDto(Client client);
+    ClientDto toClientEntityDto(Client client);
 
     @Named("creditToDto")
-    CreditEntityDto toCreditEntityDto(Credit credit);
+    CreditDto toCreditEntityDto(Credit credit);
 
     @Named("localDateTimeToOffsetDateTime")
     default OffsetDateTime localDateTimeToOffsetDateTime(LocalDateTime localDateTime) {

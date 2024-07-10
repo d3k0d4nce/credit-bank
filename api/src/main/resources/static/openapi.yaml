@@ -373,7 +373,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StatementEntityDto'
+                $ref: '#/components/schemas/StatementDto'
         '404':
           description: Заявка не найдена
   /deal/admin/statement:
@@ -387,7 +387,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StatementEntityDto'
+                  $ref: '#/components/schemas/StatementDto'
 components:
   schemas:
     LoanStatementRequestDto:
@@ -812,7 +812,7 @@ components:
         - CLIENT_DENIED
         - DOCUMENT_SIGNED
         - CREDIT_ISSUED
-    StatementEntityDto:
+    StatementDto:
       type: object
       properties:
         statementId:
@@ -820,9 +820,9 @@ components:
           format: uuid
           description: ID заявки
         client:
-          $ref: '#/components/schemas/ClientEntityDto'
+          $ref: '#/components/schemas/ClientDto'
         credit:
-          $ref: '#/components/schemas/CreditEntityDto'
+          $ref: '#/components/schemas/CreditDto'
         applicationStatus:
           type: string
           allOf:
@@ -845,7 +845,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StatusHistoryDto'
-    ClientEntityDto:
+    ClientDto:
       type: object
       properties:
         clientId:
@@ -888,44 +888,3 @@ components:
         accountNumber:
           type: string
           description: Номер счета клиента
-    CreditEntityDto:
-      type: object
-      properties:
-        creditId:
-          type: string
-          format: uuid
-          description: ID кредита
-        amount:
-          type: number
-          format: float
-          description: Сумма кредита
-        term:
-          type: integer
-          format: int32
-          description: Срок кредита
-        monthlyPayment:
-          type: number
-          format: float
-          description: Ежемесячный платеж
-        rate:
-          type: number
-          format: float
-          description: Процентная ставка
-        psk:
-          type: number
-          format: float
-          description: ПСК
-        paymentSchedule:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentScheduleElementDto'
-        isInsuranceEnabled:
-          type: boolean
-          description: Включена ли страховка
-        isSalaryClient:
-          type: boolean
-          description: Является ли клиент зарплатным
-        creditStatus:
-          type: string
-          allOf:
-            - $ref: '#/components/schemas/CreditStatus'
