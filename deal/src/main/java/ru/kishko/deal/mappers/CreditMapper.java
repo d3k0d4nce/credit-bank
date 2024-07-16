@@ -11,6 +11,7 @@ public interface CreditMapper {
 
     CreditMapper INSTANCE = Mappers.getMapper(CreditMapper.class);
 
+    @Mapping(target = "creditId", ignore = true)
     @Mapping(target = "creditStatus", constant = "CALCULATED")
     Credit toCredit(CreditDto creditDto);
 }

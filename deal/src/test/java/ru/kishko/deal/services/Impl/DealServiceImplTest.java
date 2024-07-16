@@ -10,6 +10,7 @@ import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Credit;
 import ru.kishko.deal.entities.Statement;
 import ru.kishko.deal.exceptions.validators.PassportIssueDateValidator;
+import ru.kishko.deal.mappers.StatementMapper;
 import ru.kishko.deal.services.ClientService;
 import ru.kishko.deal.services.CreditService;
 import ru.kishko.deal.services.KafkaService;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -45,6 +46,9 @@ class DealServiceImplTest {
 
     @Mock
     private KafkaService kafkaService;
+
+    @Mock
+    private StatementMapper statementMapper;
 
     @InjectMocks
     private DealServiceImpl dealService;

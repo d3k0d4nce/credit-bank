@@ -1,6 +1,7 @@
 package ru.kishko.dossier.strategy;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class SendDocuments extends AbstractEmailSender {
     private final FileService fileService;
     private final FeignControllerClient feignControllerClient;
 
+    @Autowired
     public SendDocuments(JavaMailSender mailSender, FileService fileService, FeignControllerClient feignControllerClient) {
         super(mailSender);
         this.fileService = fileService;

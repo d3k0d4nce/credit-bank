@@ -9,6 +9,7 @@ import ru.kishko.deal.entities.Client;
 import ru.kishko.deal.entities.Credit;
 import ru.kishko.deal.entities.Statement;
 import ru.kishko.deal.exceptions.validators.PassportIssueDateValidator;
+import ru.kishko.deal.mappers.StatementMapper;
 import ru.kishko.deal.services.*;
 import ru.kishko.deal.utils.Utils;
 import ru.kishko.openapi.model.*;
@@ -20,13 +21,13 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class DealServiceImpl implements DealService {
-
     private final ClientService clientService;
     private final StatementService statementService;
     private final CreditService creditService;
     private final PassportIssueDateValidator passportIssueDateValidator;
     private final Utils utils;
     private final KafkaService kafkaService;
+    private final StatementMapper statementMapper;
 
     @Override
     @Transactional
@@ -76,6 +77,7 @@ public class DealServiceImpl implements DealService {
 
     @Override
     public void sendRequestForDocument(String statementId) {
+        log.info("Sending request for document for statementId: {}", statementId);
         Statement statement = statementService.getStatementById(UUID.fromString(statementId));
         statementService.updateStatusAndStatusHistory(statement,
                 ApplicationStatus.PREPARE_DOCUMENTS, ChangeType.AUTOMATIC);
@@ -84,12 +86,14 @@ public class DealServiceImpl implements DealService {
 
     @Override
     public void updateApplicationSesCode(String statementId) {
+        log.info("Updating application ses code for statementId: {}", statementId);
         statementService.updateStatementSesCode(statementId);
         kafkaService.sendToSendSesTopic(statementId);
     }
 
     @Override
     public void verifySesCode(String statementId, Integer code){
+        log.info("Verifying ses code for statementId: {} with code: {}", statementId, code);
         Statement statement = statementService.getStatementById(UUID.fromString(statementId));
         Integer sesCode = statement.getSesCode();
         if(sesCode.equals(code)){
@@ -103,14 +107,30 @@ public class DealServiceImpl implements DealService {
 
     @Override
     public Integer dealDossierStatementGet(String statementId) {
+        log.info("Getting dossier statement for statementId: {}", statementId);
         Statement statement = statementService.getStatementById(UUID.fromString(statementId));
         return statement.getSesCode();
     }
 
     @Override
     public void updateApplicationStatus(String statementId) {
+        log.info("Updating application status for statementId: {}", statementId);
         Statement statement = statementService.getStatementById(UUID.fromString(statementId));
         statementService.updateStatusAndStatusHistory(statement, ApplicationStatus.DOCUMENT_CREATED,
                 ChangeType.AUTOMATIC);
+    }
+
+    @Override
+    public List<StatementDto> dealAdminStatementGet() {
+        log.info("Getting all statements");
+        return statementService.getAllStatements().stream()
+                .map(statementMapper::toStatementEntityDto).toList();
+    }
+
+    @Override
+    public StatementDto dealAdminStatementStatementIdGet(String statementId) {
+        log.info("Getting statement for statementId: {}", statementId);
+        Statement statement = statementService.getStatementById(UUID.fromString(statementId));
+        return statementMapper.toStatementEntityDto(statement);
     }
 }

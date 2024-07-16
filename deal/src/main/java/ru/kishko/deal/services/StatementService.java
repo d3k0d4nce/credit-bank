@@ -7,9 +7,12 @@ import ru.kishko.openapi.model.ApplicationStatus;
 import ru.kishko.openapi.model.ChangeType;
 import ru.kishko.openapi.model.LoanOfferDto;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface StatementService {
+    List<Statement> getAllStatements();
+
     Statement createStatement(Client client);
 
     Statement getStatementById(UUID statementId);

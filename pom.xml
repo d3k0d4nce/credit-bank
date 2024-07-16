@@ -9,6 +9,7 @@
 		<module>db</module>
 		<module>statement</module>
 		<module>dossier</module>
+		<module>gateway</module>
 	</modules>
 
 	<packaging>pom</packaging>
