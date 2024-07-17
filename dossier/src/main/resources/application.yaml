@@ -24,4 +24,4 @@ server:
 other:
   service:
     url:
-      deal: http://localhost:8081/deal
+      deal: ${DEAL_SERVICE:http://localhost:8081/deal}

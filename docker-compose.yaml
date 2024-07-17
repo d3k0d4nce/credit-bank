@@ -30,28 +30,11 @@ services:
       - mynetwork
     volumes:
       - db-data:/var/lib/postgresql/data
-
-  # API service
-  api:
-    build: ./api
-    container_name: 'api'
-    depends_on:
-      - zookeeper
-      - kafka
-      - postgres
-    env_file:
-      - app.env
-#    restart: on-failure
-    networks:
-      - mynetwork
-
-  # Deal service (if needed)
   deal:
     build: ./deal
     container_name: 'deal'
     depends_on:
       - postgres
-      - api
       - zookeeper
       - kafka
     env_file:
@@ -60,33 +43,13 @@ services:
     networks:
       - mynetwork
     ports:
-      - "8081:8081" # Assuming Deal service listens on 8081
-
-  # db service (if needed)
-  db:
-    build: ./db
-    container_name: 'db'
-    depends_on:
-      - postgres
-      - api
-      - deal
-      - zookeeper
-      - kafka
-    env_file:
-      - db.env
-#    restart: on-failure
-    networks:
-      - mynetwork
-
-  # calculator service (if needed)
+      - "8081:8081"
   calculator:
     build: ./calculator
     container_name: 'calculator'
     depends_on:
       - postgres
-      - api
       - deal
-      - db
       - zookeeper
       - kafka
     env_file:
@@ -95,15 +58,13 @@ services:
     networks:
       - mynetwork
     ports:
-      - "8080:8080" # Assuming Calculator service listens on 8082
+      - "8080:8080"
   statement:
     build: ./statement
     container_name: 'statement'
     depends_on:
       - postgres
-      - api
       - deal
-      - db
       - calculator
       - zookeeper
       - kafka
@@ -113,15 +74,13 @@ services:
     networks:
       - mynetwork
     ports:
-      - "8082:8082" # Assuming Calculator service listens on 8082
+      - "8082:8082"
   dossier:
     build: ./dossier
     container_name: 'dossier'
     depends_on:
       - postgres
-      - api
       - deal
-      - db
       - calculator
       - statement
       - zookeeper
@@ -132,15 +91,13 @@ services:
     networks:
       - mynetwork
     ports:
-      - "8083:8083" # Assuming Calculator service listens on 8082
+      - "8083:8083"
   gateway:
     build: ./gateway
     container_name: 'gateway'
     depends_on:
       - postgres
-      - api
       - deal
-      - db
       - calculator
       - statement
       - dossier
@@ -152,7 +109,7 @@ services:
     networks:
       - mynetwork
     ports:
-      - "8888:8888" # Assuming Calculator service listens on 8082
+      - "8888:8888"
 
 networks:
   mynetwork:

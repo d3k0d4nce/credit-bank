@@ -37,4 +37,4 @@ springdoc:
 other:
   service:
     url:
-      calculator: http://localhost:8080/calculator
+      calculator: ${CALCULATOR_SERVICE:http://localhost:8080/calculator}
