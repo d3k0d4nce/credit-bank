@@ -8,7 +8,7 @@ import ru.kishko.openapi.model.LoanStatementRequestDto;
 
 import java.util.List;
 
-@FeignClient(value = "gateway-statement", url = "http://localhost:8082/statement")
+@FeignClient(value = "gateway-statement", url = "${other.service.url.statement}")
 public interface FeignStatementClient {
 
     @PostMapping

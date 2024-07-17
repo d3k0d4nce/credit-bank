@@ -1,2 +1,8 @@
 server:
   port: 8888
+
+other:
+  service:
+    url:
+      deal: http://localhost:8081/deal
+      statement: http://localhost:8082/statement
