@@ -40,7 +40,7 @@
             <groupId>ru.kishko</groupId>
             <artifactId>api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <classifier>qa</classifier>
+<!--            <classifier>qa</classifier>-->
         </dependency>
         <dependency>
             <groupId>ru.kishko</groupId>
