@@ -14,6 +14,9 @@ spring:
     web-application-type: servlet
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
     enabled: true
   kafka:
     bootstrap-servers: localhost:9092
