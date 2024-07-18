@@ -36,7 +36,11 @@ jobs:
           distribution: 'zulu'
 
       - name: Build common with Maven
-        run: mvn -B clean package --file ./pom.xml
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5433
+          POSTGRES_DB: deal-service
+        run: mvn -B clean package --file pom.xml
 
 #      - name: Build MS-api with Maven
 #        run: mvn -B clean package --file ./api/pom.xml
