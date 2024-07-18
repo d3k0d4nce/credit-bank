@@ -22,7 +22,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         ports:
-          - 5433:5432
+          - 5433:5433
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
@@ -40,9 +40,6 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-
-      - name: Start services
-        run: docker-compose up -d
 
       - name: Run Tests
         run: mvn test
