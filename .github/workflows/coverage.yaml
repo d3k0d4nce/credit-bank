@@ -29,28 +29,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Start PostgreSQL container
-        run: docker-compose up -d postgres
-
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'zulu'
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Build MS-statement with Maven
+        run: mvn -B clean package --file ./statement/pom.xml
 
-      - name: Run Tests
-        run: mvn test
+      - name: Build MS-calculator with Maven
+        run: mvn -B clean package --file ./calculator/pom.xml
 
-      - name: Calculate Code Coverage
-        run: mvn jacoco:report
+      - name: Build MS-deal with Maven
+        run: mvn -B clean package --file ./deal/pom.xml
+
+      - name: Build MS-dossier with Maven
+        run: mvn -B clean package --file ./dossier/pom.xml
+
+      - name: Build MS-gateway with Maven
+        run: mvn -B clean package --file ./gateway/pom.xml
+
+      - name: Build common with Maven
+        run: mvn -B clean package --file ./pom.xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Stop services
-        run: docker-compose down
