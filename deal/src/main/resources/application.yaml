@@ -14,6 +14,10 @@ spring:
     web-application-type: servlet
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
+    url: jdbc:postgresql://localhost:5433/deal-service
+    user: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
     enabled: true
   kafka:
     bootstrap-servers: localhost:9092
