@@ -18,6 +18,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Build with Maven
+        run: mvn clean install
+
       - name: Start services
         run: docker-compose up -d
 
@@ -26,9 +29,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'zulu'
-
-      - name: Build with Maven
-        run: mvn clean install
 
       - name: Run Tests
         run: mvn test
