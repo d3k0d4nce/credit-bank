@@ -14,21 +14,35 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5433:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build with Maven
-        run: mvn clean install
-
-      - name: Start services
-        run: docker-compose up -d
+      - name: Start PostgreSQL container
+        run: docker-compose up -d postgres
 
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'zulu'
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Start services
+        run: docker-compose up -d
 
       - name: Run Tests
         run: mvn test
