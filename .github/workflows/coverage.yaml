@@ -27,7 +27,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         ports:
-          - 5433:5433
+          - 5432:5432
 
     steps:
       - name: Checkout code
@@ -43,7 +43,7 @@ jobs:
         env:
           SPRING_DATASOURCE_USERNAME: postgres
           SPRING_DATASOURCE_PASSWORD: postgres
-          SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5433/deal-service
+          SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/deal-service
         run: mvn -B clean package --file pom.xml
 
 #      - name: Build MS-api with Maven
