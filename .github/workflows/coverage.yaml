@@ -39,8 +39,14 @@ jobs:
           java-version: '17'
           distribution: 'zulu'
 
+      - name: Build Credit-bank with Maven
+        run: mvn -B clean install --file ./pom.xml
+
       - name: Build MS-api with Maven
-        run: mvn -B clean install --file ./api/pom.xml
+        run: mvn -B clean package --file ./api/pom.xml
+
+      - name: Build DB-api with Maven
+        run: mvn -B clean package --file ./db/pom.xml
 
       - name: Build MS-statement with Maven
         run: mvn -B clean package --file ./statement/pom.xml
