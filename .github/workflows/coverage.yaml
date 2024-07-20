@@ -14,16 +14,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: deal-service
-        ports:
-          - 5433:5433
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    postgres:
+      image: postgres:15
+      env:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: deal-service
+      options: >-
+        --health-cmd pg_isready
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
+      ports:
+        - 5433:5433
 
     steps:
       - name: Checkout code
@@ -36,10 +39,10 @@ jobs:
           distribution: 'zulu'
 
       - name: Build common with Maven
-        env:
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5433
-          POSTGRES_DB: deal-service
+#        env:
+#          POSTGRES_HOST: localhost
+#          POSTGRES_PORT: 5433
+#          POSTGRES_DB: deal-service
         run: mvn -B clean package --file pom.xml
 
 #      - name: Build MS-api with Maven
