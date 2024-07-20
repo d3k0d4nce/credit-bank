@@ -40,10 +40,10 @@ jobs:
           distribution: 'zulu'
 
       - name: Build common with Maven
-#        env:
-#          POSTGRES_HOST: localhost
-#          POSTGRES_PORT: 5433
-#          POSTGRES_DB: deal-service
+        env:
+          SPRING_DATASOURCE_USERNAME: postgres
+          SPRING_DATASOURCE_PASSWORD: postgres
+          SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5433/deal-service
         run: mvn -B clean package --file pom.xml
 
 #      - name: Build MS-api with Maven
