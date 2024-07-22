@@ -11,7 +11,7 @@ import ru.kishko.openapi.model.ScoringDataDto;
 import javax.validation.Valid;
 import java.util.List;
 
-@FeignClient(value = "deal", url = "http://localhost:8080/calculator")
+@FeignClient(value = "deal", url = "${other.service.url.calculator}")
 public interface FeignControllerClient {
 
     @PostMapping(value = "/offers")

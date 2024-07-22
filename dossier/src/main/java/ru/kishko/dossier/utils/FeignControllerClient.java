@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value = "dossier", url = "http://localhost:8081/deal")
+@FeignClient(value = "dossier", url = "${other.service.url.deal}")
 public interface FeignControllerClient {
 
     @PutMapping(value = "/dossier/statement/status")

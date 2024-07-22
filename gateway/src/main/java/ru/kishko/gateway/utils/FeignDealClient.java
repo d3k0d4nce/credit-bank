@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.kishko.openapi.model.FinishRegistrationRequestDto;
 
-@FeignClient(value = "gateway-deal", url = "http://localhost:8081/deal")
+@FeignClient(value = "gateway-deal", url = "${other.service.url.deal}")
 public interface FeignDealClient {
 
     @PostMapping(value = "/calculate/{statementId}")

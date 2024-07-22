@@ -4,3 +4,8 @@ server:
 springdoc:
   swagger-ui:
     url: /openapi.yaml
+
+other:
+  service:
+    url:
+      deal: ${DEAL_SERVICE:http://localhost:8081/deal}
