@@ -1,0 +1,928 @@
+openapi: 3.0.0
+info:
+  title: Controller API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+  - url: http://localhost:8081
+  - url: http://localhost:8082
+  - url: http://localhost:8888
+paths:
+  /gateway/calculate/{statementId}:
+    post:
+      summary: Finish registration and calculate final loan terms
+      tags:
+        - Gateway
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinishRegistrationRequestDto'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+
+  /gateway/statement:
+    post:
+      summary: Прескоринг + запрос на расчёт возможных условий кредита
+      tags:
+        - Gateway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanStatementRequestDto'
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOfferDto'
+        '400':
+          description: Bad Request
+
+  /gateway/offer:
+    post:
+      summary: Выбор одного из предложений
+      tags:
+        - Gateway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanOfferDto'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+
+  /gateway/document/{statementId}/send:
+    post:
+      summary: Отправка запроса на получение документов
+      tags:
+        - Gateway
+      operationId: sendRequestForDocument
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Неверный идентификатор заявки
+        '404':
+          description: Заявка не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /gateway/document/{statementId}/sign:
+    post:
+      summary: Отправка запроса на подписание документов
+      tags:
+        - Gateway
+      operationId: sendRequestForSignDocument
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Неверный идентификатор заявки
+        '404':
+          description: Заявка не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /gateway/document/{statementId}/{code}:
+    post:
+      summary: Подписание документов
+      tags:
+        - Gateway
+      operationId: signDocument
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+        - in: path
+          name: code
+          schema:
+            type: integer
+          required: true
+          description: SES-код
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Неверный идентификатор заявки
+        '404':
+          description: Заявка не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /calculator/offers:
+    post:
+      summary: Calculate loan offers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanStatementRequestDto'
+      responses:
+        '200':
+          description: Successful calculation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOfferDto'
+
+  /calculator/calc:
+    post:
+      summary: Calculate credit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScoringDataDto'
+      responses:
+        '200':
+          description: Successful calculation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditDto'
+
+  /deal/statement:
+    post:
+      summary: Calculate possible loan conditions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanStatementRequestDto'
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOfferDto'
+        '400':
+          description: Bad Request
+
+  /deal/offer/select:
+    post:
+      summary: Select a loan offer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanOfferDto'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+
+  /deal/calculate/{statementId}:
+    post:
+      summary: Finish registration and calculate final loan terms
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinishRegistrationRequestDto'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+
+  /statement:
+    post:
+      summary: Прескоринг + запрос на расчёт возможных условий кредита
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanStatementRequestDto'
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOfferDto'
+        '400':
+          description: Bad Request
+
+  /statement/offer:
+    post:
+      summary: Выбор одного из предложений
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanOfferDto'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+
+  /deal/document/{statementId}/send:
+    post:
+      summary: Отправка запроса на получение документов
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Неверный идентификатор заявки
+        '404':
+          description: Заявка не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /deal/document/{statementId}/sign:
+    post:
+      summary: Отправка запроса на подписание документов
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Неверный идентификатор заявки
+        '404':
+          description: Заявка не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /deal/document/{statementId}/{code}:
+    post:
+      summary: Подписание документов
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+        - in: path
+          name: code
+          schema:
+            type: integer
+          required: true
+          description: SES-код
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Неверный идентификатор заявки
+        '404':
+          description: Заявка не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+
+  /deal/dossier/statement/status:
+    put:
+      summary: Update application status
+      description: Updates the status of an application.
+      parameters:
+        - in: query
+          name: statementId
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: Application status updated successfully.
+        '400':
+          description: Bad request.
+        '404':
+          description: Application not found.
+        '500':
+          description: Internal server error.
+
+  /deal/dossier/statement:
+    get:
+      summary: Get SES code by statement ID
+      description: Retrieves the SES code for a given statement ID.
+      parameters:
+        - in: query
+          name: statementId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: SES code retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: integer
+        '400':
+          description: Bad request.
+        '404':
+          description: Statement not found.
+        '500':
+          description: Internal server error.
+
+  /deal/admin/statement/{statementId}:
+    get:
+      summary: Получить заявку по id
+      parameters:
+        - in: path
+          name: statementId
+          schema:
+            type: string
+          required: true
+          description: Идентификатор заявки
+      responses:
+        '200':
+          description: Заявка найдена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatementDto'
+        '404':
+          description: Заявка не найдена
+
+  /deal/admin/statement:
+    get:
+      summary: Получить все заявки
+      responses:
+        '200':
+          description: Список заявок
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatementDto'
+components:
+  schemas:
+    LoanStatementRequestDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          minimum: 30000
+          description: Loan amount
+        term:
+          type: integer
+          format: int32
+          minimum: 6
+          description: Loan term in months
+        firstName:
+          type: string
+          pattern: '^[a-zA-Z]{2,30}$'
+          description: First name
+        lastName:
+          type: string
+          pattern: '^[a-zA-Z]{2,30}$'
+          description: Last name
+        middleName:
+          type: string
+          pattern: '^[a-zA-Z]{2,30}$'
+          description: Middle name
+        email:
+          type: string
+          format: email
+          description: Email address
+        birthdate:
+          type: string
+          format: date
+          description: Birthdate
+        passportSeries:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 4
+          maxLength: 4
+          description: Passport series
+        passportNumber:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 6
+          maxLength: 6
+          description: Passport number
+      required:
+        - amount
+        - term
+        - firstName
+        - lastName
+        - email
+        - birthdate
+        - passportSeries
+        - passportNumber
+
+    FinishRegistrationRequestDto:
+      type: object
+      properties:
+        gender:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/Gender'
+          description: Gender
+        maritalStatus:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/MaritalStatus'
+          description: Marital status
+        dependentAmount:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Number of dependents
+        passportIssueDate:
+          type: string
+          format: date
+          description: Passport issue date
+        passportIssueBranch:
+          type: string
+          maxLength: 100
+          description: Passport issue branch
+        employment:
+          allOf:
+            - $ref: '#/components/schemas/EmploymentDto'
+          description: Employment information
+        accountNumber:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 16
+          maxLength: 20
+          description: Account number
+      required:
+        - gender
+        - maritalStatus
+        - dependentAmount
+        - passportIssueDate
+        - passportIssueBranch
+        - employment
+        - accountNumber
+
+    ScoringDataDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          minimum: 30000
+          description: Loan amount
+        term:
+          type: integer
+          format: int32
+          minimum: 6
+          description: Loan term in months
+        firstName:
+          type: string
+          pattern: '^[a-zA-Z]{2,30}$'
+          description: First name
+        lastName:
+          type: string
+          pattern: '^[a-zA-Z]{2,30}$'
+          description: Last name
+        middleName:
+          type: string
+          pattern: '^[a-zA-Z]{2,30}$'
+          description: Middle name
+        gender:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/Gender'
+          description: Gender
+        birthdate:
+          type: string
+          format: date
+          description: Birthdate
+        passportSeries:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 4
+          maxLength: 4
+          description: Passport series
+        passportNumber:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 6
+          maxLength: 6
+          description: Passport number
+        passportIssueDate:
+          type: string
+          format: date
+          description: Passport issue date
+        passportIssueBranch:
+          type: string
+          maxLength: 100
+          description: Passport issue branch
+        maritalStatus:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/MaritalStatus'
+          description: Marital status
+        dependentAmount:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Number of dependents
+        employment:
+          allOf:
+            - $ref: '#/components/schemas/EmploymentDto'
+          description: Employment information
+        accountNumber:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 16
+          maxLength: 20
+          description: Account number
+        isInsuranceEnabled:
+          type: boolean
+          description: Insurance enabled flag
+        isSalaryClient:
+          type: boolean
+          description: Salary client flag
+      required:
+        - amount
+        - term
+        - firstName
+        - lastName
+        - gender
+        - birthdate
+        - passportSeries
+        - passportNumber
+        - passportIssueDate
+        - passportIssueBranch
+        - maritalStatus
+        - dependentAmount
+        - employment
+        - accountNumber
+        - isInsuranceEnabled
+        - isSalaryClient
+
+    EmploymentDto:
+      type: object
+      properties:
+        employmentStatus:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/EmploymentStatus'
+          description: Employment status
+        employerINN:
+          type: string
+          pattern: '[0-9]+'
+          minLength: 10
+          maxLength: 12
+          description: Employer INN
+        salary:
+          type: number
+          minimum: 10000
+          description: Salary
+        position:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/EmploymentPosition'
+          description: EmploymentPosition
+        workExperienceTotal:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Total work experience in years
+        workExperienceCurrent:
+          type: integer
+          format: int32
+          minimum: 0
+          description: Work experience at current employer in years
+      required:
+        - employmentStatus
+        - employerINN
+        - salary
+        - position
+        - workExperienceTotal
+        - workExperienceCurrent
+
+    LoanOfferDto:
+      type: object
+      properties:
+        statementId:
+          type: string
+          format: uuid
+          description: Statement ID
+        requestedAmount:
+          type: number
+          description: Requested loan amount
+        totalAmount:
+          type: number
+          description: Total loan amount
+        term:
+          type: integer
+          format: int32
+          description: Loan term in months
+        monthlyPayment:
+          type: number
+          description: Monthly payment
+        rate:
+          type: number
+          description: Interest rate
+        isInsuranceEnabled:
+          type: boolean
+          description: Insurance enabled flag
+        isSalaryClient:
+          type: boolean
+          description: Salary client flag
+      required:
+        - statementId
+        - requestedAmount
+        - totalAmount
+        - term
+        - monthlyPayment
+        - rate
+        - isInsuranceEnabled
+        - isSalaryClient
+
+    PaymentScheduleElementDto:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+          description: Payment number
+        date:
+          type: string
+          format: date
+          description: Payment date
+        totalPayment:
+          type: number
+          description: Total payment amount
+        interestPayment:
+          type: number
+          description: Interest payment amount
+        debtPayment:
+          type: number
+          description: Debt payment amount
+        remainingDebt:
+          type: number
+          description: Remaining debt amount
+
+    CreditDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Loan amount
+        term:
+          type: integer
+          format: int32
+          description: Loan term in months
+        monthlyPayment:
+          type: number
+          description: Monthly payment
+        rate:
+          type: number
+          description: Interest rate
+        psk:
+          type: number
+          description: PSK (Loan product cost)
+        isInsuranceEnabled:
+          type: boolean
+          description: Insurance enabled flag
+        isSalaryClient:
+          type: boolean
+          description: Salary client flag
+        paymentSchedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentScheduleElementDto'
+
+    PassportDto:
+      type: object
+      properties:
+        series:
+          type: string
+        number:
+          type: string
+        issueBranch:
+          type: string
+        issueDate:
+          type: string
+          format: date
+
+    StatusHistoryDto:
+      type: object
+      properties:
+        status:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/ApplicationStatus'
+        timestamp:
+          type: string
+          format: date-time
+        changeType:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/ChangeType'
+
+    EmailMessage:
+      type: object
+      properties:
+        address:
+          type: string
+          format: email
+          description: Адрес электронной почты получателя
+        theme:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/Theme'
+        statementId:
+          type: string
+          format: uuid
+          description: Идентификатор заявки
+
+    Theme:
+      type: string
+      enum:
+        - FINISH_REGISTRATION
+        - CREATE_DOCUMENT
+        - YOUR_LOAN_DOCUMENTS
+        - SIGN_DOCUMENTS_WITH_SES_CODE
+        - CREDIT_ISSUED
+        - APPLICATION_DENIED
+
+    Gender:
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+        - NON_BINARY
+
+    MaritalStatus:
+      type: string
+      enum:
+        - SINGLE
+        - MARRIED
+        - DIVORCED
+        - WIDOW_WIDOWER
+
+    EmploymentStatus:
+      type: string
+      enum:
+        - EMPLOYED
+        - UNEMPLOYED
+        - SELF_EMPLOYED
+        - BUSINESS_OWNER
+
+    EmploymentPosition:
+      type: string
+      enum:
+        - WORKER
+        - OWNER
+        - TOP_MANAGER
+        - MID_MANAGER
+
+    CreditStatus:
+      type: string
+      enum:
+        - CALCULATED
+        - ISSUED
+
+    ChangeType:
+      type: string
+      enum:
+        - MANUAL
+        - AUTOMATIC
+
+    ApplicationStatus:
+      type: string
+      enum:
+        - PREAPPROVAL
+        - APPROVED
+        - CC_DENIED
+        - CC_APPROVED
+        - PREPARE_DOCUMENTS
+        - DOCUMENT_CREATED
+        - CLIENT_DENIED
+        - DOCUMENT_SIGNED
+        - CREDIT_ISSUED
+
+    StatementDto:
+      type: object
+      properties:
+        statementId:
+          type: string
+          format: uuid
+          description: ID заявки
+        client:
+          $ref: '#/components/schemas/ClientDto'
+        credit:
+          $ref: '#/components/schemas/CreditDto'
+        applicationStatus:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/ApplicationStatus'
+        creationDate:
+          type: string
+          format: date-time
+          description: Дата создания заявки
+        appliedOffer:
+          $ref: '#/components/schemas/LoanOfferDto'
+        signDate:
+          type: string
+          format: date-time
+          description: Дата подписания заявки
+        sesCode:
+          type: integer
+          format: int32
+          description: SES код
+        statusHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusHistoryDto'
+
+    ClientDto:
+      type: object
+      properties:
+        clientId:
+          type: string
+          format: uuid
+          description: ID клиента
+        lastName:
+          type: string
+          description: Фамилия клиента
+        firstName:
+          type: string
+          description: Имя клиента
+        middleName:
+          type: string
+          description: Отчество клиента
+        birthdate:
+          type: string
+          format: date
+          description: Дата рождения клиента
+        email:
+          type: string
+          format: email
+          description: Email клиента
+        gender:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/Gender'
+        maritalStatus:
+          type: string
+          allOf:
+            - $ref: '#/components/schemas/MaritalStatus'
+        dependentAmount:
+          type: integer
+          format: int32
+          description: Количество иждивенцев
+        passport:
+          $ref: '#/components/schemas/PassportDto'
+        employment:
+          $ref: '#/components/schemas/EmploymentDto'
+        accountNumber:
+          type: string
+          description: Номер счета клиента

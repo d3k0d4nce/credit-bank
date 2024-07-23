@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet id="create-statement-table" author="d3k0d4nce">
+        <insert tableName="statement">
+            <column name="statement_id" value="1d342110-e0e7-4c4c-ab50-0188d834d951"/>
+            <column name="client_id" value="5d342110-e0e7-4c4c-ab50-0188d834d953"/>
+            <column name="credit_id" value="1d342110-e0e7-4c4c-ab50-0188d834d951"/>
+            <column name="status" value="PREAPPROVAL"/>
+            <column name="creation_date" value="2024-07-05 10:51:57.283987"/>
+            <column name="applied_offer" value='{"rate":15,"term":6,"statementId":"d8290a9b-f536-43fc-84e7-1e1322b2334c","totalAmount":31326.06,"isSalaryClient":false,"monthlyPayment":5221.01,"requestedAmount":30000,"isInsuranceEnabled":false}'/>
+            <column name="sign_date" value="2024-07-05 10:52:59.061933"/>
+            <column name="ses_code" value="123456"/>
+            <column name="status_history" value='[{"status": "PREAPPROVAL","timestamp": "2024-07-05T10:51:57.2849878+04:00","changeType": "AUTOMATIC"},{"status": "APPROVED","timestamp": "2024-07-05T10:52:10.0527961+04:00","changeType": "AUTOMATIC"},{"status": "CC_APPROVED","timestamp": "2024-07-05T10:52:59.0619325+04:00","changeType": "AUTOMATIC"},{"status": "PREPARE_DOCUMENTS","timestamp": "2024-07-05T10:53:24.8335224+04:00","changeType": "AUTOMATIC"},{"status": "DOCUMENT_CREATED","timestamp": "2024-07-05T10:53:26.1415762+04:00","changeType": "AUTOMATIC"}]'/>
+        </insert>
+        <insert tableName="statement">
+            <column name="statement_id" value="2d342110-e0e7-4c4c-ab50-0188d834d952"/>
+            <column name="client_id" value="6d342110-e0e7-4c4c-ab50-0188d834d954"/>
+            <column name="credit_id" value="2d342110-e0e7-4c4c-ab50-0188d834d952"/>
+            <column name="status" value="CC_DENIED"/>
+            <column name="creation_date" value="2024-07-05 10:51:57.283987"/>
+            <column name="applied_offer" value='{"rate":15,"term":6,"statementId":"d8290a9b-f536-43fc-84e7-1e1322b2334c","totalAmount":31326.06,"isSalaryClient":false,"monthlyPayment":5221.01,"requestedAmount":30000,"isInsuranceEnabled":false}'/>
+            <column name="sign_date" value="2024-07-05 10:52:59.061933"/>
+            <column name="ses_code" value="789012"/>
+            <column name="status_history" value='[{"status": "PREAPPROVAL","timestamp": "2024-07-05T10:51:57.2849878+04:00","changeType": "AUTOMATIC"},{"status": "APPROVED","timestamp": "2024-07-05T10:52:10.0527961+04:00","changeType": "AUTOMATIC"},{"status": "CC_APPROVED","timestamp": "2024-07-05T10:52:59.0619325+04:00","changeType": "AUTOMATIC"},{"status": "PREPARE_DOCUMENTS","timestamp": "2024-07-05T10:53:24.8335224+04:00","changeType": "AUTOMATIC"},{"status": "DOCUMENT_CREATED","timestamp": "2024-07-05T10:53:26.1415762+04:00","changeType": "AUTOMATIC"}]'/>
+        </insert>
+        <insert tableName="statement">
+            <column name="statement_id" value="3d342110-e0e7-4c4c-ab50-0188d834d953"/>
+            <column name="client_id" value="7d342110-e0e7-4c4c-ab50-0188d834d955"/>
+            <column name="credit_id" value="3d342110-e0e7-4c4c-ab50-0188d834d953"/>
+            <column name="status" value="DOCUMENT_CREATED"/>
+            <column name="creation_date" value="2024-07-05 10:51:57.283987"/>
+            <column name="applied_offer" value='{"rate":15,"term":6,"statementId":"d8290a9b-f536-43fc-84e7-1e1322b2334c","totalAmount":31326.06,"isSalaryClient":false,"monthlyPayment":5221.01,"requestedAmount":30000,"isInsuranceEnabled":false}'/>
+            <column name="sign_date" value="2024-07-05 10:52:59.061933"/>
+            <column name="ses_code" value="345678"/>
+            <column name="status_history" value='[{"status": "PREAPPROVAL","timestamp": "2024-07-05T10:51:57.2849878+04:00","changeType": "AUTOMATIC"},{"status": "APPROVED","timestamp": "2024-07-05T10:52:10.0527961+04:00","changeType": "AUTOMATIC"},{"status": "CC_APPROVED","timestamp": "2024-07-05T10:52:59.0619325+04:00","changeType": "AUTOMATIC"},{"status": "PREPARE_DOCUMENTS","timestamp": "2024-07-05T10:53:24.8335224+04:00","changeType": "AUTOMATIC"},{"status": "DOCUMENT_CREATED","timestamp": "2024-07-05T10:53:26.1415762+04:00","changeType": "AUTOMATIC"}]'/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

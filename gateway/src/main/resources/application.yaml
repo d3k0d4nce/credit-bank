@@ -1,0 +1,8 @@
+server:
+  port: 8888
+
+other:
+  service:
+    url:
+      deal: ${DEAL_SERVICE:http://localhost:8081/deal}
+      statement: ${STATEMENT_SERVICE:http://localhost:8082/statement}

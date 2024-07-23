@@ -1,0 +1,129 @@
+version: '3.8'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.4
+    container_name: 'zookeeper'
+    env_file:
+      - kafka.env
+    ports:
+      - "22181:2181"
+    networks:
+      - mynetwork
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.4
+    container_name: 'kafka'
+    depends_on:
+      - zookeeper
+    ports:
+      - "9093:9093"
+      - "9092:9092"
+    env_file:
+      - kafka.env
+    networks:
+      - mynetwork
+
+  postgres:
+    image: 'postgres:15'
+    container_name: 'postgres'
+    ports:
+      - "5432:5432"
+    env_file:
+      - db.env
+    networks:
+      - mynetwork
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  deal:
+    build: ./deal
+    container_name: 'deal'
+    depends_on:
+      - postgres
+      - zookeeper
+      - kafka
+    env_file:
+      - app.env
+    restart: on-failure
+    networks:
+      - mynetwork
+    ports:
+      - "8081:8081"
+
+  calculator:
+    build: ./calculator
+    container_name: 'calculator'
+    depends_on:
+      - postgres
+      - deal
+      - zookeeper
+      - kafka
+    env_file:
+      - app.env
+    restart: on-failure
+    networks:
+      - mynetwork
+    ports:
+      - "8080:8080"
+
+  statement:
+    build: ./statement
+    container_name: 'statement'
+    depends_on:
+      - postgres
+      - deal
+      - calculator
+      - zookeeper
+      - kafka
+    env_file:
+      - app.env
+    restart: on-failure
+    networks:
+      - mynetwork
+    ports:
+      - "8082:8082"
+
+  dossier:
+    build: ./dossier
+    container_name: 'dossier'
+    depends_on:
+      - postgres
+      - deal
+      - calculator
+      - statement
+      - zookeeper
+      - kafka
+    env_file:
+      - app.env
+    restart: on-failure
+    networks:
+      - mynetwork
+    ports:
+      - "8083:8083"
+
+  gateway:
+    build: ./gateway
+    container_name: 'gateway'
+    depends_on:
+      - postgres
+      - deal
+      - calculator
+      - statement
+      - dossier
+      - zookeeper
+      - kafka
+    env_file:
+      - app.env
+    restart: on-failure
+    networks:
+      - mynetwork
+    ports:
+      - "8888:8888"
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local

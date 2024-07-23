@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/deal-service
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+    show_sql: true
+  main:
+    web-application-type: servlet
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+  kafka:
+    bootstrap-servers: localhost:9092
+
+kafka:
+  topic:
+    finishRegistration: finish-registration
+    createDocuments: create-documents
+    sendDocuments: send-documents
+    sendSes: send-ses
+    creditIssued: credit-issued
+    statementDenied: statement-denied
+
+server:
+  port: 8081
+
+springdoc:
+  swagger-ui:
+    url: /openapi.yaml
+
+other:
+  service:
+    url:
+      calculator: ${CALCULATOR_SERVICE:http://localhost:8080/calculator}
