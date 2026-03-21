@@ -120,6 +120,33 @@ services:
     ports:
       - "8888:8888"
 
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana:/var/lib/grafana
+      - ./config/grafana/provisioning:/etc/grafana/provisioning
+    env_file:
+      - grafana.env
+    restart: on-failure
+    networks:
+      - mynetwork
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    restart: on-failure
+    networks:
+      - mynetwork
+
 networks:
   mynetwork:
     driver: bridge
