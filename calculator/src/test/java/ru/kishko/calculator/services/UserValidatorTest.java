@@ -21,7 +21,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldThrowExceptionForUnemployed() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.UNEMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.UNEMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
 
         Exception exception = assertThrows(CreditException.class, () -> validator.validate(data, creditDto));
@@ -30,7 +30,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldAdjustRateForSelfEmployed() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.SELF_EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.SELF_EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
 
@@ -40,7 +40,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldAdjustRateForBusinessOwner() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.BUSINESS_OWNER, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.BUSINESS_OWNER, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
 
@@ -50,7 +50,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldAdjustRateForManager() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
 
@@ -60,7 +60,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldAdjustRateForTopManager() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
 
@@ -70,7 +70,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldThrowExceptionForInvalidLoanAmount() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 2, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 2, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         // Установите начальное значение для creditDto.getRate()
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
@@ -81,7 +81,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldAdjustRateForMarried() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
 
@@ -91,7 +91,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldAdjustRateForDivorced() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.DIVORCED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.DIVORCED, Gender.MALE, LocalDate.of(1990, 1, 1), 20, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
 
@@ -101,7 +101,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldThrowExceptionForInvalidAge() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(2005, 1, 1), 15, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(2007, 1, 1), 25, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         // Установите начальное значение для creditDto.getRate()
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
@@ -112,7 +112,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldThrowExceptionForInvalidAge2() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1940, 1, 1), 80, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1940, 1, 1), 80, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         // Установите начальное значение для creditDto.getRate()
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
@@ -123,7 +123,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldAdjustRateForNonBinary() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.NON_BINARY, LocalDate.of(1990, 1, 1), 20, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.NON_BINARY, LocalDate.of(1990, 1, 1), 20, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
 
@@ -133,7 +133,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldAdjustRateForFemaleWithinAgeRange() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.FEMALE, LocalDate.of(1980, 1, 1), 40, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.FEMALE, LocalDate.of(1980, 1, 1), 40, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
 
@@ -143,7 +143,7 @@ class UserValidatorTest {
 
     @Test
     void validate_shouldAdjustRateForMaleWithinAgeRange() {
-        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1985, 1, 1), 35, 5);
+        ScoringDataDto data = createScoringDataDto(EmploymentStatus.EMPLOYED, EmploymentPosition.MID_MANAGER, 100000, 25000, MaritalStatus.MARRIED, Gender.MALE, LocalDate.of(1985, 1, 1), 35, 20);
         CreditDto creditDto = Mockito.mock(CreditDto.class);
         Mockito.when(creditDto.getRate()).thenReturn(BigDecimal.valueOf(10));
 

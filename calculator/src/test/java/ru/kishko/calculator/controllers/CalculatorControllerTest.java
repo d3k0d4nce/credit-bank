@@ -9,13 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import ru.kishko.calculator.dtos.*;
-import ru.kishko.calculator.enums.EmploymentStatus;
-import ru.kishko.calculator.enums.Gender;
-import ru.kishko.calculator.enums.MaritalStatus;
-import ru.kishko.calculator.enums.Position;
 import ru.kishko.calculator.services.CalculatorCreditService;
 import ru.kishko.calculator.services.CalculatorOfferService;
+import ru.kishko.openapi.model.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -87,7 +83,7 @@ class CalculatorControllerTest {
                 .employmentStatus(EmploymentStatus.EMPLOYED)
                 .employerINN("1234567890")
                 .salary(BigDecimal.valueOf(50000))
-                .position(Position.MANAGER)
+                .position(EmploymentPosition.OWNER)
                 .workExperienceTotal(5)
                 .workExperienceCurrent(2)
                 .build();
