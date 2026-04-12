@@ -1,0 +1,211 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Продуктовые метрики: заявки и кредиты",
+  "editable": true,
+  "graphTooltip": 0,
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 0},
+      "id": 1,
+      "panels": [],
+      "title": "Ключевые показатели",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
+      "datasource": "Prometheus",
+      "decimals": 0,
+      "format": "none",
+      "gridPos": {"h": 4, "w": 4, "x": 0, "y": 1},
+      "id": 2,
+      "targets": [
+        {
+          "expr": "sum(product_loan_applications_total)",
+          "format": "time_series",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Всего заявок (за час)",
+      "type": "singlestat",
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": ["#299c46", "rgba(237, 129, 40, 0.89)", "#d44a3a"],
+      "datasource": "Prometheus",
+      "decimals": 0,
+      "format": "none",
+      "gridPos": {"h": 4, "w": 4, "x": 4, "y": 1},
+      "id": 3,
+      "targets": [
+        {
+          "expr": "sum(product_credit_issued_total)",
+          "format": "time_series",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Всего выдано кредитов (за час)",
+      "type": "singlestat",
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": ["#d44a3a", "rgba(237, 129, 40, 0.89)", "#299c46"],
+      "datasource": "Prometheus",
+      "decimals": 1,
+      "format": "percentunit",
+      "gridPos": {"h": 4, "w": 4, "x": 8, "y": 1},
+      "id": 4,
+      "targets": [
+        {
+          "expr": "product_approval_rate_percent / 100",
+          "format": "time_series",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Процент одобрения",
+      "type": "singlestat",
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": ["#d44a3a", "rgba(237, 129, 40, 0.89)", "#299c46"],
+      "datasource": "Prometheus",
+      "decimals": 1,
+      "format": "percentunit",
+      "gridPos": {"h": 4, "w": 4, "x": 12, "y": 1},
+      "id": 5,
+      "targets": [
+        {
+          "expr": "product_conversion_rate_percent / 100",
+          "format": "time_series",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Конверсия в выдачу",
+      "type": "singlestat",
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 5},
+      "id": 6,
+      "legend": {"avg": false, "current": true, "max": true, "show": true, "values": true},
+      "lines": true,
+      "linewidth": 2,
+      "targets": [
+        {
+          "expr": "sum by(instance) (product_loan_applications_per_minute)",
+          "format": "time_series",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Заявки в минуту по сервисам",
+      "type": "graph",
+      "xaxis": {"mode": "time", "show": true},
+      "yaxes": [{"format": "short", "min": "0", "show": true}, {"format": "short", "show": true}]
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 5},
+      "id": 7,
+      "legend": {"avg": false, "current": true, "max": true, "show": true, "values": true},
+      "lines": true,
+      "linewidth": 2,
+      "targets": [
+        {
+          "expr": "product_approval_rate_percent",
+          "format": "time_series",
+          "legendFormat": "Процент одобрения",
+          "refId": "A"
+        },
+        {
+          "expr": "product_conversion_rate_percent",
+          "format": "time_series",
+          "legendFormat": "Конверсия в выдачу",
+          "refId": "B"
+        }
+      ],
+      "title": "Процентные метрики",
+      "type": "graph",
+      "xaxis": {"mode": "time", "show": true},
+      "yaxes": [{"format": "percent", "min": "0", "max": "100", "show": true}, {"format": "short", "show": true}]
+    },
+    {
+      "columns": [],
+      "datasource": "Prometheus",
+      "fontSize": "100%",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 13},
+      "id": 8,
+      "pageSize": null,
+      "showHeader": true,
+      "sort": {"col": 1, "desc": true},
+      "styles": [
+        {"alias": "Сервис", "pattern": "instance", "type": "string"},
+        {"alias": "Заявки (мин)", "pattern": "Value", "type": "number", "unit": "short"}
+      ],
+      "targets": [
+        {
+          "expr": "topk(5, product_loan_applications_per_minute)",
+          "format": "table",
+          "instant": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Топ-5 сервисов по заявкам",
+      "transform": "table",
+      "type": "table-old"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": ["product", "loans"],
+  "templating": {
+    "list": []
+  },
+  "time": {"from": "now-15m", "to": "now"},
+  "title": "Продуктовые метрики: Заявки и Кредиты",
+  "uid": "product-metrics",
+  "version": 1
+}

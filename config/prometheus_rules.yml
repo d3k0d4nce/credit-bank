@@ -1,0 +1,32 @@
+groups:
+  - name: product_metrics
+    interval: 5s
+    rules:
+      - record: product_loan_applications_total
+        expr: sum(rate(http_server_requests_seconds_count{uri="/gateway/statement", method="POST"}[1m])) * 60
+
+      - record: product_loan_applications_approved
+        expr: sum(rate(http_server_requests_seconds_count{uri="/gateway/offer", method="POST", status="200"}[1m])) * 60
+
+      - record: product_loan_applications_rejected
+        expr: sum(rate(http_server_requests_seconds_count{uri="/gateway/statement", method="POST", status="500"}[1m])) * 60
+
+      - record: product_credit_issued_total
+        expr: sum(rate(http_server_requests_seconds_count{uri="/gateway/calculate/{statementId}", method="POST", status="200"}[1m])) * 60
+
+      - record: product_approval_rate_percent
+        expr: |
+          sum(rate(http_server_requests_seconds_count{uri="/gateway/offer", method="POST", status="200"}[5m])) 
+          / 
+          sum(rate(http_server_requests_seconds_count{uri="/gateway/statement", method="POST"}[5m])) 
+          * 100
+
+      - record: product_loan_applications_per_minute
+        expr: sum by(instance) (rate(http_server_requests_seconds_count{uri="/gateway/statement", method="POST"}[1m])) * 60
+
+      - record: product_conversion_rate_percent
+        expr: |
+          sum(rate(http_server_requests_seconds_count{uri="/gateway/calculate/{statementId}", method="POST", status="200"}[5m]))
+          /
+          sum(rate(http_server_requests_seconds_count{uri="/gateway/statement", method="POST"}[5m]))
+          * 100
