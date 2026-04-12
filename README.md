@@ -29,3 +29,9 @@ Response time percentiles — время ответа для 50%, 75%, 90%, 95% 
 Top 10 APIs — 10 самых часто вызываемых эндпоинтов
 
 <img width="1280" height="634" alt="image" src="https://github.com/user-attachments/assets/8647b073-1585-42a1-b4f7-1ef74b4740c8" />
+
+<img width="1280" height="607" alt="image" src="https://github.com/user-attachments/assets/c416d379-447e-4586-b4ed-eb78eb3521f7" />
+
+<img width="1280" height="596" alt="image" src="https://github.com/user-attachments/assets/48e0e016-2ce2-4f48-acbd-526c3850af4f" />
+
+<img width="1280" height="560" alt="image" src="https://github.com/user-attachments/assets/3ebce574-a6c0-409f-98c5-2625082d6b00" />
