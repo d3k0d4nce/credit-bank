@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.4
@@ -121,7 +120,8 @@ services:
       - "8888:8888"
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:latest
+    container_name: 'grafana'
     ports:
       - "3000:3000"
     volumes:
@@ -134,11 +134,13 @@ services:
       - mynetwork
 
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:latest
+    container_name: 'prometheus'
     ports:
       - "9090:9090"
     volumes:
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus_rules.yml:/etc/prometheus/prometheus_rules.yml
       - ./prometheus:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'

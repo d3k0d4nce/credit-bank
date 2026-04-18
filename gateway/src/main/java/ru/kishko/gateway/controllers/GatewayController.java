@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
+import ru.kishko.gateway.metrics.LoanMetrics;
 import ru.kishko.gateway.utils.FeignDealClient;
 import ru.kishko.gateway.utils.FeignStatementClient;
 import ru.kishko.openapi.api.GatewayApi;
@@ -23,11 +24,13 @@ public class GatewayController implements GatewayApi {
 
     private final FeignStatementClient feignStatementClient;
     private final FeignDealClient feignDealClient;
+    private final LoanMetrics loanMetrics;
 
     @Override
     public ResponseEntity<Void> gatewayCalculateStatementIdPost(String statementId, FinishRegistrationRequestDto finishRegistrationRequestDto) {
         log.info("Запрос на расчет statementId: {}, request: {}", statementId, finishRegistrationRequestDto);
         feignDealClient.dealCalculateStatementIdPost(statementId, finishRegistrationRequestDto);
+        loanMetrics.incrementIssued();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -42,6 +45,7 @@ public class GatewayController implements GatewayApi {
     public ResponseEntity<List<LoanOfferDto>> gatewayStatementPost(LoanStatementRequestDto loanStatementRequestDto) {
         log.info("Запрос на получение предложений по кредиту: {}", loanStatementRequestDto);
         List<LoanOfferDto> result = feignStatementClient.getLoanOffers(loanStatementRequestDto);
+        loanMetrics.incrementApplications();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
