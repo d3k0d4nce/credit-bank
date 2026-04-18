@@ -3,7 +3,7 @@ groups:
     interval: 5s
     rules:
       - record: product_loan_applications_total
-        expr: sum(rate(http_server_requests_seconds_count{uri="/gateway/statement", method="POST"}[1m])) * 60
+        expr: sum(rate(loan_applications_total[1m])) * 60
 
       - record: product_loan_applications_approved
         expr: sum(rate(http_server_requests_seconds_count{uri="/gateway/offer", method="POST", status="200"}[1m])) * 60
@@ -12,7 +12,7 @@ groups:
         expr: sum(rate(http_server_requests_seconds_count{uri="/gateway/statement", method="POST", status="500"}[1m])) * 60
 
       - record: product_credit_issued_total
-        expr: sum(rate(http_server_requests_seconds_count{uri="/gateway/calculate/{statementId}", method="POST", status="200"}[1m])) * 60
+        expr: sum(rate(loan_issued_total[1m])) * 60
 
       - record: product_approval_rate_percent
         expr: |
