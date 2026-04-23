@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import ru.kishko.gateway.metrics.LoanMetrics;
 import ru.kishko.gateway.utils.FeignDealClient;
 import ru.kishko.gateway.utils.FeignStatementClient;
 import ru.kishko.openapi.model.FinishRegistrationRequestDto;
@@ -33,6 +34,9 @@ class GatewayControllerTest {
 
     @Mock
     private FeignDealClient feignDealClient;
+
+    @Mock
+    private LoanMetrics loanMetrics;
 
     @Test
     public void testGatewayCalculateStatementIdPost() {
