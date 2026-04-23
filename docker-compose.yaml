@@ -129,6 +129,9 @@ services:
       - ./config/grafana/provisioning:/etc/grafana/provisioning
     env_file:
       - grafana.env
+    depends_on:
+      - loki
+      - prometheus
     restart: on-failure
     networks:
       - mynetwork
@@ -149,10 +152,24 @@ services:
     networks:
       - mynetwork
 
+  loki:
+    image: grafana/loki:latest
+    container_name: 'loki'
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - loki_data:/loki
+    restart: on-failure
+    networks:
+      - mynetwork
+
 networks:
   mynetwork:
     driver: bridge
 
 volumes:
   db-data:
+    driver: local
+  loki_data:
     driver: local
