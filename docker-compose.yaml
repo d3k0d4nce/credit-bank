@@ -42,7 +42,7 @@ services:
       - zookeeper
       - kafka
     env_file:
-      - app.env
+      - ./deal/.env
     restart: on-failure
     networks:
       - mynetwork
@@ -58,7 +58,7 @@ services:
       - zookeeper
       - kafka
     env_file:
-      - app.env
+      - ./calculator/.env
     restart: on-failure
     networks:
       - mynetwork
@@ -75,7 +75,7 @@ services:
       - zookeeper
       - kafka
     env_file:
-      - app.env
+      - ./statement/.env
     restart: on-failure
     networks:
       - mynetwork
@@ -112,7 +112,7 @@ services:
       - zookeeper
       - kafka
     env_file:
-      - app.env
+      - ./gateway/.env
     restart: on-failure
     networks:
       - mynetwork
@@ -160,7 +160,21 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - loki_data:/loki
+    env_file:
+      - app.env
     restart: on-failure
+    networks:
+      - mynetwork
+
+  jaeger:
+    image: jaegertracing/jaeger:latest
+    container_name: 'jaeger'
+    ports:
+      - "16686:16686"
+      - "4318:4318"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+      - COLLECTOR_OTLP_HOST=0.0.0.0
     networks:
       - mynetwork
 
