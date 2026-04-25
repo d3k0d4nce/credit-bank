@@ -6,6 +6,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 @TestPropertySource(properties = {
+        "otel.sdk.disabled=true",
         "otel.traces.exporter=none",
         "otel.metrics.exporter=none"
 })
