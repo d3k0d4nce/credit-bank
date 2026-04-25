@@ -161,3 +161,15 @@ sum by (service) (count_over_time({app="credit-bank", level="ERROR"}[1h]))
 **Jaeger → Grafana**
 
 <img width="1619" height="863" alt="image" src="https://github.com/user-attachments/assets/f9295d1d-60e6-45ea-b080-90f39597df0e" />
+
+## ⚙️ CI/CD
+
+Проект использует GitHub Actions для автоматизации сборки, тестирования и анализа качества кода.
+
+### 🔍 SonarCloud — статический анализ кода
+
+Запускается при каждом push и pull request в любую ветку. Проверяет качество кода, обнаруживает баги, уязвимости и code smells.
+
+### 🧪 CI — непрерывная интеграция
+
+Выполняется параллельно с SonarCloud. Собирает проект, прогоняет все тесты и отправляет отчёт о покрытии в Codecov. Поддерживает ручной запуск через `workflow_dispatch`.
