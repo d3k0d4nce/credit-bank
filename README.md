@@ -155,3 +155,9 @@
 # Подсчёт ошибок по сервисам
 sum by (service) (count_over_time({app="credit-bank", level="ERROR"}[1h]))
 ```
+
+## 📝 Трассировка
+
+**Jaeger → Grafana**
+
+<img width="1619" height="863" alt="image" src="https://github.com/user-attachments/assets/f9295d1d-60e6-45ea-b080-90f39597df0e" />
