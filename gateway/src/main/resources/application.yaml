@@ -19,3 +19,6 @@ management:
     distribution:
       percentiles-histogram:
         "[http.server.requests]": true
+
+loki:
+  url: ${LOKI_ENDPOINT:http://localhost:3100/loki/api/v1/push}
